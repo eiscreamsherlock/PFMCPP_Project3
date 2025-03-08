@@ -196,53 +196,53 @@ Part 1b - Step 2: Assignment
         c) pick properties that can eventually be represented with 
         'int float double bool char std::string'.
 
-Thing 1)
+Thing 1) Sword
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) length
+    2) weight
+    3) material
+    4) time since last sharpening
+    5) width of crossguard
 3 things it can do:
-    1)
-    2)
-    3)
+    1) chop
+    2) stab
+    3) sheathe/unsheathe
 
-Thing 2)
+Thing 2) Fountain Pen
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Color of ink
+    2) Amount of ink in resevoir
+    3) Time since last cleaning
+    4) Nib width
+    5) Nib feed capacity
 3 things it can do:
-    1)
-    2)
-    3)
+    1) Display current ink level
+    2) Write a character
+    3) Draw a line
 
-Thing 3)
+Thing 3) Gameboy
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) screen size
+    2) screen brightness
+    3) name of inserted game
+    4) volume
+    5) battery percentage remaining
 3 things it can do:
-    1)
-    2)
-    3)
+    1) power on/off
+    2) adjust volume
+    3) adjust brightness
 
-Thing 4)
+Thing 4) Camera
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Battery level
+    2) Screen size
+    3) Number of megapixels
+    4) Number of buttons
+    5) flash brightness
 3 things it can do:
-    1)
-    2)
-    3)
+    1) emit flash
+    2) adjust aperture
+    3) capture image
 */
 
 /*
