@@ -434,65 +434,65 @@ example:
     You will need to provide 5 properties and 3 member functions of that Engine object in plain English.
     Remember to pick properties that can be represented with 'int float double bool char std::string'.
 
-Thing 5)
+Thing 5) receiver
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) number of input channels (int)
+    2) main volume (float)
+    3) number of output channels (int)
+    4) treble volume (float)
+    5) bass volume (float)
 3 things it can do:
-    1)
-    2)
-    3)
+    1) change output channel group
+    2) power on/off
+    3) change volume
 
-Thing 6)
+Thing 6) speakers
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) number of speakers (int)
+    2) diameter of tweeter (float)
+    3) power (in watts) (int)
+    4) diameter of woofer (float)
+    5) diameter of midrange driver (float)
 3 things it can do:
-    1)
-    2)
-    3)
+    1) power on/off
+    2) adjust output volume
+    3) bypass driver (for headphone use)
 
-Thing 7)
+Thing 7) turntable
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) speed (rotation per min) (int)
+    2) pitch adjust percent (float)
+    3) rotation direction (int)
+    4) needle location (float)
+    5) running time (int)
 3 things it can do:
-    1)
-    2)
-    3)
+    1) rotate forward
+    2) move needle
+    3) change pitch adjust percentage
 
-Thing 8)
+Thing 8) radio
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) fm channel (float)
+    2) am channel (int)
+    3) satellite station (int)
+    4) channel preset (int)
+    5) current signal strength (float)
 3 things it can do:
-    1)
-    2)
-    3)
+    1) change channel
+    2) demodulate broadcast wave
+    3) change wave type (am/fm/xm)
 
-Thing 9)
+Thing 9) cd changer
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) current number of cds in changer (int)
+    2) max number of cds (int)
+    3) current track number (int)
+    4) current track name (std::string)
+    5) current cd in reader (std::string)
 3 things it can do:
-    1)
-    2)
-    3)
+    1) play cd
+    2) change track
+    3) pause playback
  */
 
 /*
