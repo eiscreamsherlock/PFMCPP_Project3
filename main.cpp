@@ -442,7 +442,12 @@ Thing 1) Sword
     1) chop
     2) stab
     3) sheathe/unsheathe
+*/
+struct Sword
+{
 
+};
+/*
 Thing 2) Fountain Pen
 5 properties:
     1) Color of ink (std::string)
@@ -454,7 +459,12 @@ Thing 2) Fountain Pen
     1) Display current ink level
     2) Write a character
     3) Draw a line
+*/
+struct FountainPen
+{
 
+};
+/*
 Thing 3) Gameboy
 5 properties:
     1) screen size (int)
@@ -466,7 +476,12 @@ Thing 3) Gameboy
     1) power on/off
     2) adjust volume
     3) adjust brightness
+*/
+struct GameBoy
+{
 
+};
+/*
 Thing 4) Camera
 5 properties:
     1) Battery level (float)
@@ -478,7 +493,12 @@ Thing 4) Camera
     1) emit flash
     2) adjust aperture
     3) capture image
+*/
+struct Camera
+{
 
+};
+/*
 Thing 5) receiver
 5 properties:
     1) number of input channels (int)
@@ -490,7 +510,12 @@ Thing 5) receiver
     1) change output channel group
     2) power on/off
     3) change volume
+*/
+struct Receiver
+{
 
+};
+/*
 Thing 6) speakers
 5 properties:
     1) number of speakers (int)
@@ -502,7 +527,12 @@ Thing 6) speakers
     1) power on/off
     2) adjust output volume
     3) bypass driver (for headphone use)
+*/
+struct Speakers
+{
 
+};
+/*
 Thing 7) turntable
 5 properties:
     1) speed (rotation per min) (int)
@@ -514,7 +544,12 @@ Thing 7) turntable
     1) rotate forward
     2) move needle
     3) change pitch adjust percentage
+*/
+struct Turntable
+{
 
+};
+/*
 Thing 8) radio
 5 properties:
     1) fm channel (float)
@@ -526,7 +561,12 @@ Thing 8) radio
     1) change channel
     2) demodulate broadcast wave
     3) change wave type (am/fm/xm)
+*/
+struct Radio
+{
 
+};
+/*
 Thing 9) cd changer
 5 properties:
     1) current number of cds in changer (int)
@@ -538,7 +578,12 @@ Thing 9) cd changer
     1) play cd
     2) change track
     3) pause playback
+*/
+struct CdChanger
+{
 
+};
+/*
 Thing 10) Home stereo
 5 properties:
     1) receiver
@@ -551,7 +596,10 @@ Thing 10) Home stereo
     2) change FM channel
     3) play backwards (to find the devil's music)
 */
+struct HomeStereo
+{
 
+};
 /*
 =================
 Part 1d - Step 7: Commit
