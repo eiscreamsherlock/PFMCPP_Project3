@@ -445,7 +445,15 @@ Thing 1) Sword
 */
 struct Sword
 {
-
+//     1) length (float)
+//     2) weight (float)
+//     3) material (std::string)
+//     4) time since last sharpening (int)
+//     5) width of crossguard (float)
+// 3 things it can do:
+//     1) chop
+//     2) stab
+//     3) sheathe/unsheathe
 };
 /*
 Thing 2) Fountain Pen
@@ -462,7 +470,15 @@ Thing 2) Fountain Pen
 */
 struct FountainPen
 {
-
+//     1) Color of ink (std::string)
+//     2) Amount of ink in resevoir (float)
+//     3) Time since last cleaning (int)
+//     4) Nib width (float)
+//     5) Nib feed capacity (float)
+// 3 things it can do:
+//     1) Display current ink level
+//     2) Write a character
+//     3) Draw a line
 };
 /*
 Thing 3) Gameboy
@@ -479,7 +495,15 @@ Thing 3) Gameboy
 */
 struct GameBoy
 {
-
+//     1) screen size (int)
+//     2) screen brightness (double)
+//     3) name of inserted game (std::string)
+//     4) volume (float)
+//     5) battery percentage remaining (float)
+// 3 things it can do:
+//     1) power on/off
+//     2) adjust volume
+//     3) adjust brightness
 };
 /*
 Thing 4) Camera
@@ -496,7 +520,15 @@ Thing 4) Camera
 */
 struct Camera
 {
-
+//     1) Battery level (float)
+//     2) Screen size, area (int)
+//     3) Number of megapixels (int)
+//     4) Number of buttons (int)
+//     5) flash brightness (float)
+// 3 things it can do:
+//     1) emit flash
+//     2) adjust aperture
+//     3) capture image
 };
 /*
 Thing 5) receiver
@@ -513,7 +545,15 @@ Thing 5) receiver
 */
 struct Receiver
 {
-
+//     1) number of input channels (int)
+//     2) main volume (float)
+//     3) number of output channels (int)
+//     4) treble volume (float)
+//     5) bass volume (float)
+// 3 things it can do:
+//     1) change output channel group
+//     2) power on/off
+//     3) change volume
 };
 /*
 Thing 6) speakers
@@ -530,7 +570,15 @@ Thing 6) speakers
 */
 struct Speakers
 {
-
+//     1) number of speakers (int)
+//     2) diameter of tweeter (float)
+//     3) power (in watts) (int)
+//     4) diameter of woofer (float)
+//     5) diameter of midrange driver (float)
+// 3 things it can do:
+//     1) power on/off
+//     2) adjust output volume
+//     3) bypass driver (for headphone use)
 };
 /*
 Thing 7) turntable
@@ -547,7 +595,15 @@ Thing 7) turntable
 */
 struct Turntable
 {
-
+//     1) speed (rotation per min) (int)
+//     2) pitch adjust percent (float)
+//     3) rotation direction (int)
+//     4) needle location (float)
+//     5) running time (int)
+// 3 things it can do:
+//     1) rotate forward
+//     2) move needle
+//     3) change pitch adjust percentage
 };
 /*
 Thing 8) radio
@@ -564,7 +620,15 @@ Thing 8) radio
 */
 struct Radio
 {
-
+//     1) fm channel (float)
+//     2) am channel (int)
+//     3) satellite station (int)
+//     4) channel preset (int)
+//     5) current signal strength (float)
+// 3 things it can do:
+//     1) change channel
+//     2) demodulate broadcast wave
+//     3) change wave type (am/fm/xm)
 };
 /*
 Thing 9) cd changer
@@ -581,7 +645,15 @@ Thing 9) cd changer
 */
 struct CdChanger
 {
-
+//     1) current number of cds in changer (int)
+//     2) max number of cds (int)
+//     3) current track number (int)
+//     4) current track name (std::string)
+//     5) current cd in reader (std::string)
+// 3 things it can do:
+//     1) play cd
+//     2) change track
+//     3) pause playback
 };
 /*
 Thing 10) Home stereo
@@ -598,7 +670,15 @@ Thing 10) Home stereo
 */
 struct HomeStereo
 {
-
+//     1) receiver
+//     2) speakers
+//     3) turntable
+//     4) radio
+//     5) cd changer
+// 3 things it can do:
+//     1) play music
+//     2) change FM channel
+//     3) play backwards (to find the devil's music)
 };
 /*
 =================
