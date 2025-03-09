@@ -198,11 +198,11 @@ Part 1b - Step 2: Assignment
 
 Thing 1) Sword
 5 properties:
-    1) length
-    2) weight
-    3) material
-    4) time since last sharpening
-    5) width of crossguard
+    1) length (float)
+    2) weight (float)
+    3) material (std::string)
+    4) time since last sharpening (int)
+    5) width of crossguard (float)
 3 things it can do:
     1) chop
     2) stab
@@ -210,11 +210,11 @@ Thing 1) Sword
 
 Thing 2) Fountain Pen
 5 properties:
-    1) Color of ink
-    2) Amount of ink in resevoir
-    3) Time since last cleaning
-    4) Nib width
-    5) Nib feed capacity
+    1) Color of ink (std::string)
+    2) Amount of ink in resevoir (float)
+    3) Time since last cleaning (int)
+    4) Nib width (float)
+    5) Nib feed capacity (float)
 3 things it can do:
     1) Display current ink level
     2) Write a character
@@ -222,11 +222,11 @@ Thing 2) Fountain Pen
 
 Thing 3) Gameboy
 5 properties:
-    1) screen size
-    2) screen brightness
-    3) name of inserted game
-    4) volume
-    5) battery percentage remaining
+    1) screen size (int)
+    2) screen brightness (double)
+    3) name of inserted game (std::string)
+    4) volume (float)
+    5) battery percentage remaining (float)
 3 things it can do:
     1) power on/off
     2) adjust volume
@@ -234,11 +234,11 @@ Thing 3) Gameboy
 
 Thing 4) Camera
 5 properties:
-    1) Battery level
-    2) Screen size
-    3) Number of megapixels
-    4) Number of buttons
-    5) flash brightness
+    1) Battery level (float)
+    2) Screen size, area (int)
+    3) Number of megapixels (int)
+    4) Number of buttons (int)
+    5) flash brightness (float)
 3 things it can do:
     1) emit flash
     2) adjust aperture
