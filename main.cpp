@@ -337,17 +337,17 @@ Define an object that is made of 5 sub-objects.
     These 5 sub-objects will not be defined using Primitives, but instead will be their own UDTs 
     you'll define these 5 sub-objects in Part 1d.
 
-Thing 10)
+Thing 10) Home stereo
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) receiver
+    2) speakers
+    3) turntable
+    4) radio
+    5) cd changer
 3 things it can do:
-    1)
-    2)
-    3)
+    1) play music
+    2) change FM channel
+    3) play backwards for the devil's music
  */
 
  /*
