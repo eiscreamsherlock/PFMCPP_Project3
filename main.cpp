@@ -457,8 +457,11 @@ struct Sword
     int crossguardWidth = 35;
 // 3 things it can do:
 //     1) chop
+    void chop();
 //     2) stab
+    void stab();
 //     3) sheathe/unsheathe
+    void sheatheOrUnsheathe();
 };
 /*
 Thing 2) Fountain Pen
@@ -487,8 +490,11 @@ struct FountainPen
     float nibFeedCapacity = 30.0f;
 // 3 things it can do:
 //     1) Display current ink level
+    int displayCurrentInkLvl();
 //     2) Write a character
+    void writeCharacter(char userCharacter);
 //     3) Draw a line
+    void drawALine(int x_start, int y_start, int lengthOfLine);
 };
 /*
 Thing 3) Gameboy
@@ -517,8 +523,11 @@ struct GameBoy
     float batteryConsumptionPercentage = 80.0f;
 // 3 things it can do:
 //     1) power on/off
+    void powerOnOrOff();
 //     2) adjust volume
+    float adjustVolume(float adjustAmount); // return updated volume
 //     3) adjust brightness
+    double adjustBrightness(double adjustAmount); // return updated brightness
 };
 /*
 Thing 4) Camera
@@ -547,8 +556,11 @@ struct Camera
     int flashBrightnessEV = 9.0;
 // 3 things it can do:
 //     1) emit flash
+    void emitFlash();
 //     2) adjust aperture
+    int adjustAperture(int adjustAmount);    // return new aperture
 //     3) capture image
+    void captureImage();                    // saves to disk, but returns no value
 };
 /*
 Thing 5) receiver
@@ -577,8 +589,11 @@ struct Receiver
     float bassVolume = 5.0f;
 // 3 things it can do:
 //     1) change output channel group
+    int changeOutputChannelGroup(int target);    // return active channel group
 //     2) power on/off
+    void powerOnOrOff();
 //     3) change volume
+    float changeVolume(float changeAmount);      // return updated volume
 };
 /*
 Thing 6) speakers
@@ -607,8 +622,11 @@ struct Speakers
     float midDriverDiameter = 3.3f;
 // 3 things it can do:
 //     1) power on/off
+    void powerOnOrOff();
 //     2) adjust output volume
+    float changeVolume(float changeAmount);    // return the new volume
 //     3) bypass driver (for headphone use)
+    void bypassSpeakerDriver();
 };
 /*
 Thing 7) turntable
@@ -637,8 +655,11 @@ struct Turntable
     int totalRunTime = 0;
 // 3 things it can do:
 //     1) rotate forward
+    void rotateForward();
 //     2) move needle
+    float moveNeedle(float needleLocation, float moveAmount);    // return new location
 //     3) change pitch adjust percentage
+    float changePitchAdjust(float changeAmount);                // return new pitch adjust amount
 };
 /*
 Thing 8) radio
@@ -667,8 +688,11 @@ struct Radio
     float broadcastSignalStrengthPercent = 100.0f;
 // 3 things it can do:
 //     1) change channel
+    void changeChannel(float targetChannel);
 //     2) demodulate broadcast wave
+    void demodulateBroadcastWave(float wave);
 //     3) change wave type (am/fm/xm)
+    void changeWaveListenedType(int targetWave);
 };
 /*
 Thing 9) cd changer
@@ -697,8 +721,11 @@ struct CdChanger
     std::string currentDisc = "Midnight Madness";
 // 3 things it can do:
 //     1) play cd
+    void playCD(int newCdNumber);
 //     2) change track
+    void changeTrack (int newTrackNumber);
 //     3) pause playback
+    void pausePlayback();
 };
 /*
 Thing 10) Home stereo
@@ -727,8 +754,11 @@ struct HomeStereo
     CdChanger cdChanger;
 // 3 things it can do:
 //     1) play music
+    void playMusic();
 //     2) change FM channel
+    void changeFmChannel(float newFmChannel);
 //     3) play backwards (to find the devil's music)
+    void playInReverse();
 };
 /*
 =================
