@@ -716,10 +716,15 @@ Thing 10) Home stereo
 struct HomeStereo
 {
 //     1) receiver
+    Receiver receiver;
 //     2) speakers
+    Speakers speakers;
 //     3) turntable
+    Turntable turntable;
 //     4) radio
+    Radio radio;
 //     5) cd changer
+    CdChanger cdChanger;
 // 3 things it can do:
 //     1) play music
 //     2) change FM channel
