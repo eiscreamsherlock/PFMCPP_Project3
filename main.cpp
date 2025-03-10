@@ -446,10 +446,15 @@ Thing 1) Sword
 struct Sword
 {
 //     1) length (float)
+    int swordLengthInCm = 82;
 //     2) weight (float)
+    float swordWeightnGrams = 853.8f;
 //     3) material (std::string)
+    std::string swordMaterial = "carbon steel";
 //     4) time since last sharpening (int)
+    int minSinceLastSharpen = 1440;
 //     5) width of crossguard (float)
+    int crossguardWidth = 35;
 // 3 things it can do:
 //     1) chop
 //     2) stab
@@ -471,10 +476,15 @@ Thing 2) Fountain Pen
 struct FountainPen
 {
 //     1) Color of ink (std::string)
+    std::string inkColor = "black";
 //     2) Amount of ink in resevoir (float)
+    float inkRemaining = 30.0f;
 //     3) Time since last cleaning (int)
+    int daysSinceLastClean = 30;
 //     4) Nib width (float)
+    float nibWidthInMm = 10.5f;
 //     5) Nib feed capacity (float)
+    float nibFeedCapacity = 30.0f;
 // 3 things it can do:
 //     1) Display current ink level
 //     2) Write a character
@@ -496,10 +506,15 @@ Thing 3) Gameboy
 struct GameBoy
 {
 //     1) screen size (int)
+    int screenSize = 5;
 //     2) screen brightness (double)
+    double screenBrightness = 75.0;
 //     3) name of inserted game (std::string)
+    std::string nameOfInsertedGame = "Pokemon Yellow";
 //     4) volume (float)
+    float volume = 15.0f;
 //     5) battery percentage remaining (float)
+    float batteryConsumptionPercentage = 80.0f;
 // 3 things it can do:
 //     1) power on/off
 //     2) adjust volume
@@ -521,10 +536,15 @@ Thing 4) Camera
 struct Camera
 {
 //     1) Battery level (float)
+    float batteryLevelPercentage = 100.0f;
 //     2) Screen size, area (int)
+    int screenDiagnoalSize = 3;
 //     3) Number of megapixels (int)
+    int numOfPixels = 14;
 //     4) Number of buttons (int)
+    int numOfButtons = 7;
 //     5) flash brightness (float)
+    int flashBrightnessEV = 9.0;
 // 3 things it can do:
 //     1) emit flash
 //     2) adjust aperture
@@ -546,10 +566,15 @@ Thing 5) receiver
 struct Receiver
 {
 //     1) number of input channels (int)
+    int numOfInputChannels = 2;
 //     2) main volume (float)
+    float mainVolume = 35.0;
 //     3) number of output channels (int)
+    int numOfOutputChannels = 4;
 //     4) treble volume (float)
+    float trebleVolume = 5.0f;
 //     5) bass volume (float)
+    float bassVolume = 5.0f;
 // 3 things it can do:
 //     1) change output channel group
 //     2) power on/off
@@ -571,10 +596,15 @@ Thing 6) speakers
 struct Speakers
 {
 //     1) number of speakers (int)
+    int numOfSpeakers = 2;
 //     2) diameter of tweeter (float)
+    float tweeterDiameter = 2.0f;
 //     3) power (in watts) (int)
+    int speakerWattage = 35;
 //     4) diameter of woofer (float)
+    float wooferDiameter = 5.5f;
 //     5) diameter of midrange driver (float)
+    float midDriverDiameter = 3.3f;
 // 3 things it can do:
 //     1) power on/off
 //     2) adjust output volume
@@ -596,10 +626,15 @@ Thing 7) turntable
 struct Turntable
 {
 //     1) speed (rotation per min) (int)
+    int playbackSpeed = 45;
 //     2) pitch adjust percent (float)
+    float pitchAdjustPercent = 0.0f;
 //     3) rotation direction (int)
+    int playDirection = 1;
 //     4) needle location (float)
+    float needLocation = 1.0f;
 //     5) running time (int)
+    int totalRunTime = 0;
 // 3 things it can do:
 //     1) rotate forward
 //     2) move needle
@@ -621,10 +656,15 @@ Thing 8) radio
 struct Radio
 {
 //     1) fm channel (float)
+    float fmChannel = 97.1f;
 //     2) am channel (int)
+    int amChannel = 540;
 //     3) satellite station (int)
+    int satChannel = 55;
 //     4) channel preset (int)
+    int channelPreset = 1;
 //     5) current signal strength (float)
+    float broadcastSignalStrengthPercent = 100.0f;
 // 3 things it can do:
 //     1) change channel
 //     2) demodulate broadcast wave
@@ -646,10 +686,15 @@ Thing 9) cd changer
 struct CdChanger
 {
 //     1) current number of cds in changer (int)
+    int numDiscsInChanger = 0;
 //     2) max number of cds (int)
+    int maxNumDiscsInChanger = 32;
 //     3) current track number (int)
+    int currTrackNumber = 1;
 //     4) current track name (std::string)
+    std::string currentTrackName = "Sister Christian";
 //     5) current cd in reader (std::string)
+    std::string currentDisc = "Midnight Madness";
 // 3 things it can do:
 //     1) play cd
 //     2) change track
