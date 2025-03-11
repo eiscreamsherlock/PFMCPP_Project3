@@ -787,9 +787,9 @@ struct HomeStereo
 //     1) play music
     void playMusic();
 //     2) change FM channel
-    void changeFmChannel(float newFmChannel);
+    void changeFmChannel(float newFmChannel, Radio radio);
 //     3) play backwards (to find the devil's music)
-    void playInReverse();
+    void playInReverse(Turntable attachedTurntable);
 };
 /*
 =================
