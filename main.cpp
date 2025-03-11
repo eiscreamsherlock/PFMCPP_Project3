@@ -501,12 +501,15 @@ struct FountainPen
         void changeNib(std::string oldNib, std::string newNib);
     };
 // 3 things it can do:
+    Nib currentInstalledNib;
 //     1) Display current ink level
     int displayCurrentInkLvl();
 //     2) Write a character
     void writeCharacter(char userCharacter);
 //     3) Draw a line
     void drawALine(int x_start, int y_start, int lengthOfLine);
+    float getMmNibWidth(Nib currentNib);        // return Nib size
+    float compareFeedCapacity(Nib currentNib, Nib newNib);
 };
 /*
 Thing 3) Gameboy
@@ -547,11 +550,15 @@ struct GameBoy
     };
 // 3 things it can do:
 //     1) power on/off
+
+    GameCartridge currentGame;
     void powerOnOrOff();
 //     2) adjust volume
     float adjustVolume(float adjustAmount); // return updated volume
 //     3) adjust brightness
     double adjustBrightness(double adjustAmount); // return updated brightness
+    void insertNewCartridge(GameCartridge oldGame, GameCartridge newGame);
+
 };
 /*
 Thing 4) Camera
