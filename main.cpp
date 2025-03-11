@@ -488,6 +488,18 @@ struct FountainPen
     float nibWidthInMm = 10.5f;
 //     5) Nib feed capacity (float)
     float nibFeedCapacity = 30.0f;
+    struct Nib
+    {
+        std::string nibStyle = "fine";
+        bool isPolished = false;
+        bool needsCleaning = false;
+        int lengthOfNibInMm = 25;
+        double mmDistanceBetweenTines = 0.001;
+        
+        void cleanNib(bool needsCleaning);    // Pass in needsCleaning to potentially skip if already clean
+        void polishNib(std::string nibStyle, bool isPolished);
+        void changeNib(std::string oldNib, std::string newNib);
+    };
 // 3 things it can do:
 //     1) Display current ink level
     int displayCurrentInkLvl();
@@ -521,6 +533,18 @@ struct GameBoy
     float volume = 15.0f;
 //     5) battery percentage remaining (float)
     float batteryConsumptionPercentage = 80.0f;
+    struct GameCartridge
+    {
+        std::string name = "Battle Toads";
+        bool isClean = true;
+        std::string cartridgeColor = "grey";
+        int cartridgeMemoryUsed = 8;
+        bool isRumblePackEnabled = false;
+
+        void saveGameStateToRAM();
+        void cleanCartridgeHead(std::string gameToClean);
+        bool doYouHaveBattleToads();        // Tells us if they have Battle Toads
+    };
 // 3 things it can do:
 //     1) power on/off
     void powerOnOrOff();
