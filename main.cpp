@@ -83,51 +83,51 @@ Main Object: Car Interior
         Name 4 nouns you'll find on the [Sub Object]
             1) paddle shifters
             2) 'cruise control' controls
-            3) 
-            4) 
+            3) horn
+            4) hands-free phone control
         Name 2 actions that the [Sub Object] can do:
             1) adjust cruise control settings.
-            2)
+            2) call person
         
     Sub Object: Instrument Cluster
         Name 4 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
-            4)
+            1) odometer
+            2) fuel gauge
+            3) speedometer
+            4) outside temperature
         Name 3 actions that the [Sub Object] can do:
-            1)
-            2)
-            3)
+            1) display current outside temperature
+            2) display current speed
+            3) display current speed
     
     Sub Object: Environment Controls
         Name 3 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
+            1) fan control
+            2) temperature control
+            3) windshield defrost control
         Name 3 actions that the [Sub Object] can do:
-            1)
-            2)
-            3)
+            1) adjust fan speed
+            2) adjust temperature
+            3) engage windshield defrost
 
     Sub Object: Infotainment System
         Name 3 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
+            1) radio/media options
+            2) vehicle status
+            3) GPS
         Name 3 actions that the [Sub Object] can do:
-            1)
-            2)
-            3)
+            1) check tire pressure
+            2) display time till next oil change
+            3) change to next song
 
     Sub Object: Seat 
         Name 3 nouns you'll find on the [Sub Object]
-            1)
-            2)
-            3)
+            1) seat belt
+            2) position adjuster
+            3) seat heater
         Name 2 actions that the [Sub Object] can do:
-            1)
-            2)
+            1) adjust seat forward or backward
+            2) engage seat heater
 */
 
 /*
@@ -196,53 +196,7 @@ Part 1b - Step 2: Assignment
         c) pick properties that can eventually be represented with 
         'int float double bool char std::string'.
 
-Thing 1)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
 
-Thing 2)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
-
-Thing 3)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
-
-Thing 4)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
 */
 
 /*
@@ -337,17 +291,7 @@ Define an object that is made of 5 sub-objects.
     These 5 sub-objects will not be defined using Primitives, but instead will be their own UDTs 
     you'll define these 5 sub-objects in Part 1d.
 
-Thing 10)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
+
  */
 
  /*
@@ -434,65 +378,7 @@ example:
     You will need to provide 5 properties and 3 member functions of that Engine object in plain English.
     Remember to pick properties that can be represented with 'int float double bool char std::string'.
 
-Thing 5)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
 
-Thing 6)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
-
-Thing 7)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
-
-Thing 8)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
-
-Thing 9)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
  */
 
 /*
@@ -544,13 +430,6 @@ MOVE THEM to the space below this block comment and put them in numerical order
     I only want to see the 10 UDTs written BELOW this block comment, in numerical order (1 - 10).
     simply CUT and PASTE them in the space provided below:
 */
-
-
-
-
-
-
-
 
 /*
 =================
@@ -1009,7 +888,367 @@ Part 1e - Step 19: Request a review
 /*
 paste your code below
 */
+/*
+Thing 1) Sword
+5 properties:
+    1) length (float)
+    2) weight (float)
+    3) material (std::string)
+    4) time since last sharpening (int)
+    5) width of crossguard (float)
+3 things it can do:
+    1) chop
+    2) stab
+    3) sheathe/unsheathe
+*/
+struct Sword
+{
+//     1) length (float)
+    int swordLengthInCm = 82;
+//     2) weight (float)
+    float swordWeightnGrams = 853.8f;
+//     3) material (std::string)
+    std::string swordMaterial = "carbon steel";
+//     4) time since last sharpening (int)
+    int minSinceLastSharpen = 1440;
+//     5) width of crossguard (float)
+    int crossguardWidth = 35;
+// 3 things it can do:
+//     1) chop
+    void chop();
+//     2) stab
+    void stab();
+//     3) sheathe/unsheathe
+    void sheatheOrUnsheathe();
+};
+/*
+Thing 2) Fountain Pen
+5 properties:
+    1) Color of ink (std::string)
+    2) Amount of ink in resevoir (float)
+    3) Time since last cleaning (int)
+    4) Nib width (float)
+    5) Nib feed capacity (float)
+3 things it can do:
+    1) Display current ink level
+    2) Write a character
+    3) Draw a line
+*/
+struct FountainPen
+{
+//     1) Color of ink (std::string)
+    std::string inkColor = "black";
+//     2) Amount of ink in resevoir (float)
+    float inkRemaining = 30.0f;
+//     3) Time since last cleaning (int)
+    int daysSinceLastClean = 30;
+//     4) Nib width (float)
+    float nibWidthInMm = 10.5f;
+//     5) Nib feed capacity (float)
+    float nibFeedCapacity = 30.0f;
+    struct Nib
+    {
+        std::string nibStyle = "fine";
+        bool isPolished = false;
+        bool needsCleaning = false;
+        int lengthOfNibInMm = 25;
+        double mmDistanceBetweenTines = 0.001;
 
+        void cleanNib(bool needsCleaning);    // Pass in needsCleaning to potentially skip if already clean
+        void polishNib(std::string nibStyle, bool isPolished);
+        void changeNib(std::string oldNib, std::string newNib);
+    };
+// 3 things it can do:
+    Nib currentInstalledNib;
+//     1) Display current ink level
+    int displayCurrentInkLvl();
+//     2) Write a character
+    void writeCharacter(char userCharacter);
+//     3) Draw a line
+    void drawALine(int x_start, int y_start, int lengthOfLine);
+    float getMmNibWidth(Nib currentNib);        // return Nib size
+    float compareFeedCapacity(Nib currentNib, Nib newNib);
+};
+/*
+Thing 3) Gameboy
+5 properties:
+    1) screen size (int)
+    2) screen brightness (double)
+    3) name of inserted game (std::string)
+    4) volume (float)
+    5) battery percentage remaining (float)
+3 things it can do:
+    1) power on/off
+    2) adjust volume
+    3) adjust brightness
+*/
+struct GameBoy
+{
+//     1) screen size (int)
+    int screenSize = 5;
+//     2) screen brightness (double)
+    double screenBrightness = 75.0;
+//     3) name of inserted game (std::string)
+    std::string nameOfInsertedGame = "Pokemon Yellow";
+//     4) volume (float)
+    float volume = 15.0f;
+//     5) battery percentage remaining (float)
+    float batteryConsumptionPercentage = 80.0f;
+    struct GameCartridge
+    {
+        std::string name = "Battle Toads";
+        bool isClean = true;
+        std::string cartridgeColor = "grey";
+        int cartridgeMemoryUsed = 8;
+        bool isRumblePackEnabled = false;
+
+        void saveGameStateToRAM();
+        void cleanCartridgeHead(std::string gameToClean);
+        bool doYouHaveBattleToads();        // Tells us if they have Battle Toads
+    };
+// 3 things it can do:
+//     1) power on/off
+
+    GameCartridge currentGame;
+    void powerOnOrOff();
+//     2) adjust volume
+    float adjustVolume(float adjustAmount); // return updated volume
+//     3) adjust brightness
+    double adjustBrightness(double adjustAmount); // return updated brightness
+    void insertNewCartridge(GameCartridge oldGame, GameCartridge newGame);
+
+};
+/*
+Thing 4) Camera
+5 properties:
+    1) Battery level (float)
+    2) Screen size, area (int)
+    3) Number of megapixels (int)
+    4) Number of buttons (int)
+    5) flash brightness (float)
+3 things it can do:
+    1) emit flash
+    2) adjust aperture
+    3) capture image
+*/
+struct Camera
+{
+//     1) Battery level (float)
+    float batteryLevelPercentage = 100.0f;
+//     2) Screen size, area (int)
+    int screenDiagnoalSize = 3;
+//     3) Number of megapixels (int)
+    int numOfPixels = 14;
+//     4) Number of buttons (int)
+    int numOfButtons = 7;
+//     5) flash brightness (float)
+    int flashBrightnessEV = 9.0;
+// 3 things it can do:
+//     1) emit flash
+    void emitFlash();
+//     2) adjust aperture
+    int adjustAperture(int adjustAmount);    // return new aperture
+//     3) capture image
+    void captureImage();                    // saves to disk, but returns no value
+};
+/*
+Thing 5) receiver
+5 properties:
+    1) number of input channels (int)
+    2) main volume (float)
+    3) number of output channels (int)
+    4) treble volume (float)
+    5) bass volume (float)
+3 things it can do:
+    1) change output channel group
+    2) power on/off
+    3) change volume
+*/
+struct Receiver
+{
+//     1) number of input channels (int)
+    int numOfInputChannels = 2;
+//     2) main volume (float)
+    float mainVolume = 35.0;
+//     3) number of output channels (int)
+    int numOfOutputChannels = 4;
+//     4) treble volume (float)
+    float trebleVolume = 5.0f;
+//     5) bass volume (float)
+    float bassVolume = 5.0f;
+// 3 things it can do:
+//     1) change output channel group
+    int changeOutputChannelGroup(int target);    // return active channel group
+//     2) power on/off
+    void powerOnOrOff();
+//     3) change volume
+    float changeVolume(float changeAmount);      // return updated volume
+};
+/*
+Thing 6) speakers
+5 properties:
+    1) number of speakers (int)
+    2) diameter of tweeter (float)
+    3) power (in watts) (int)
+    4) diameter of woofer (float)
+    5) diameter of midrange driver (float)
+3 things it can do:
+    1) power on/off
+    2) adjust output volume
+    3) bypass driver (for headphone use)
+*/
+struct Speakers
+{
+//     1) number of speakers (int)
+    int numOfSpeakers = 2;
+//     2) diameter of tweeter (float)
+    float tweeterDiameter = 2.0f;
+//     3) power (in watts) (int)
+    int speakerWattage = 35;
+//     4) diameter of woofer (float)
+    float wooferDiameter = 5.5f;
+//     5) diameter of midrange driver (float)
+    float midDriverDiameter = 3.3f;
+// 3 things it can do:
+//     1) power on/off
+    void powerOnOrOff();
+//     2) adjust output volume
+    float changeVolume(float changeAmount);    // return the new volume
+//     3) bypass driver (for headphone use)
+    void bypassSpeakerDriver();
+};
+/*
+Thing 7) turntable
+5 properties:
+    1) speed (rotation per min) (int)
+    2) pitch adjust percent (float)
+    3) rotation direction (int)
+    4) needle location (float)
+    5) running time (int)
+3 things it can do:
+    1) rotate forward
+    2) move needle
+    3) change pitch adjust percentage
+*/
+struct Turntable
+{
+//     1) speed (rotation per min) (int)
+    int playbackSpeed = 45;
+//     2) pitch adjust percent (float)
+    float pitchAdjustPercent = 0.0f;
+//     3) rotation direction (int)
+    int playDirection = 1;
+//     4) needle location (float)
+    float needLocation = 1.0f;
+//     5) running time (int)
+    int totalRunTime = 0;
+// 3 things it can do:
+//     1) rotate forward
+    void rotateForward();
+//     2) move needle
+    float moveNeedle(float needleLocation, float moveAmount);    // return new location
+//     3) change pitch adjust percentage
+    float changePitchAdjust(float changeAmount);                // return new pitch adjust amount
+};
+/*
+Thing 8) radio
+5 properties:
+    1) fm channel (float)
+    2) am channel (int)
+    3) satellite station (int)
+    4) channel preset (int)
+    5) current signal strength (float)
+3 things it can do:
+    1) change channel
+    2) demodulate broadcast wave
+    3) change wave type (am/fm/xm)
+*/
+struct Radio
+{
+//     1) fm channel (float)
+    float fmChannel = 97.1f;
+//     2) am channel (int)
+    int amChannel = 540;
+//     3) satellite station (int)
+    int satChannel = 55;
+//     4) channel preset (int)
+    int channelPreset = 1;
+//     5) current signal strength (float)
+    float broadcastSignalStrengthPercent = 100.0f;
+// 3 things it can do:
+//     1) change channel
+    void changeChannel(float targetChannel);
+//     2) demodulate broadcast wave
+    void demodulateBroadcastWave(float wave);
+//     3) change wave type (am/fm/xm)
+    void changeWaveListenedType(int targetWave);
+};
+/*
+Thing 9) cd changer
+5 properties:
+    1) current number of cds in changer (int)
+    2) max number of cds (int)
+    3) current track number (int)
+    4) current track name (std::string)
+    5) current cd in reader (std::string)
+3 things it can do:
+    1) play cd
+    2) change track
+    3) pause playback
+*/
+struct CdChanger
+{
+//     1) current number of cds in changer (int)
+    int numDiscsInChanger = 0;
+//     2) max number of cds (int)
+    int maxNumDiscsInChanger = 32;
+//     3) current track number (int)
+    int currTrackNumber = 1;
+//     4) current track name (std::string)
+    std::string currentTrackName = "Sister Christian";
+//     5) current cd in reader (std::string)
+    std::string currentDisc = "Midnight Madness";
+// 3 things it can do:
+//     1) play cd
+    void playCD(int newCdNumber);
+//     2) change track
+    void changeTrack (int newTrackNumber);
+//     3) pause playback
+    void pausePlayback();
+};
+/*
+Thing 10) Home stereo
+5 properties:
+    1) receiver
+    2) speakers
+    3) turntable
+    4) radio
+    5) cd changer
+3 things it can do:
+    1) play music
+    2) change FM channel
+    3) play backwards (to find the devil's music)
+*/
+struct HomeStereo
+{
+//     1) receiver
+    Receiver receiver;
+//     2) speakers
+    Speakers speakers;
+//     3) turntable
+    Turntable turntable;
+//     4) radio
+    Radio radio;
+//     5) cd changer
+    CdChanger cdChanger;
+// 3 things it can do:
+//     1) play music
+    void playMusic();
+//     2) change FM channel
+    void changeFmChannel(float newFmChannel, Radio radio);
+//     3) play backwards (to find the devil's music)
+    void playInReverse(Turntable attachedTurntable);
+};
 
 
 
