@@ -108,6 +108,7 @@ struct CarWash
     You'll need to insert the Person struct from the video in the space below.
  */
 
+
 struct Person
 {
     int age;
@@ -116,53 +117,35 @@ struct Person
     float GPA;
     unsigned int SATScore;
     int distanceTraveled;
-    char currentFoot{};
 
     struct Foot
     {
-        int shoeSize;
+        int shoeSize{12};
         char shoeWidth;
-        int strideLength;
-        char footLabel{};
+        int strideLength{20};
+        int footLabel;
     
-        void stepForward();
-        int stepSize(int size, int length);
+        int stepForward()
+        {
+            return stepSize();
+        }
+        int stepSize()
+        {
+            return shoeSize + strideLength;
+        }
     };
-    Foot rightFoot;
+
     Foot leftFoot;
+    Foot rightFoot;
 
-    void run(int howFast, bool startWithLeftFoot);
+    void run(int howFast, bool startWithLeftFoot)
+    {
+        if (startWithLeftFoot) 
+            distanceTraveled += (leftFoot.stepSize() + rightFoot.stepSize()) * howFast;
 
+        distanceTraveled += (rightFoot.stepSize() + leftFoot.stepSize()) * howFast;
+    }
 };
-
-void Person::run(int howFast, bool startWithLeftFoot)
-{
-    if(startWithLeftFoot == true)
-    {
-        leftFoot.stepForward();
-        rightFoot.stepForward();
-    }
-    else
-    {
-        rightFoot.stepForward();
-        leftFoot.stepForward();
-    }
-    
-    distanceTraveled += (leftFoot.stepSize(leftFoot.shoeSize, leftFoot.strideLength) + rightFoot.stepSize(rightFoot.shoeSize, rightFoot.strideLength)) * howFast;
-    
-}
-
-void Person::Foot::stepForward()
-{
-    
-}
-
-int Person::Foot::stepSize(int size, int stride)
-{
-    return size + stride;
-}
-
-
 
 
 
@@ -188,16 +171,35 @@ int Person::Foot::stepSize(int size, int stride)
 
 struct Sword
 {
-    int swordLengthInCm = 82;
-    float swordWeightnGrams = 853.8f;
-    std::string swordMaterial = "carbon steel";
+    int lengthInCm = 82;
+    float weightnGrams = 853.8f;
+    std::string material = "glorious nippon steel";
     int minSinceLastSharpen = 1440;
     int crossguardWidth = 35;
 
-    void chop();
+    bool longOrShort();
     void stab();
-    void sheatheOrUnsheathe();
+    bool needSharpen();
 };
+
+bool Sword::longOrShort()
+{
+    if (lengthInCm < 40) return true;
+    return false;
+}
+
+bool Sword::needSharpen()
+{
+    if (minSinceLastSharpen > 360) return true;
+    return false;
+}
+
+void Sword::stab()
+{
+    std::cout << "I stab at thee!\t";
+    std::cout << "->------ \n";
+}
+
 
 struct FountainPen
 {
@@ -205,18 +207,19 @@ struct FountainPen
     float inkRemaining = 30.0f;
     int daysSinceLastClean = 30;
     float nibWidthInMm = 10.5f;
-    float nibFeedCapacity = 30.0f;
+    float feedCapacity = 30.0f;
+
     struct Nib
     {
-        std::string nibStyle = "fine";
+        std::string style = "fine";
         bool isPolished = false;
         bool needsCleaning = false;
-        int lengthOfNibInMm = 25;
+        float lengthInMm = 25;
         double mmDistanceBetweenTines = 0.001;
 
-        void cleanNib(bool needsCleaning);
+        void cleanNib(bool toClean);
         void polishNib(std::string nibStyle, bool isPolished);
-        void changeNib(std::string oldNib, std::string newNib);
+        void changeNib(std::string newNib);
     };
 
     Nib currentInstalledNib;
@@ -224,9 +227,75 @@ struct FountainPen
 
     void writeCharacter(char userCharacter);
     void drawALine(int x_start, int y_start, int lengthOfLine);
-    float getMmNibWidth(Nib currentNib);
-    float compareFeedCapacity(Nib currentNib, Nib newNib);
+    float getMmNibLength(Nib currentNib);
+    float compareNibLength(Nib currentNib, Nib newNib);
 };
+
+
+void FountainPen::Nib::cleanNib(bool needClean)
+{
+    if (needClean)
+    {
+        std::cout << "All clean!\n";
+        needsCleaning = false;
+    }
+    else
+    {
+        std::cout << "Nothing to do, already clean!\n";
+    }
+    
+}
+
+void FountainPen::Nib::polishNib(std::string nStyle, bool alreadyPolished)
+{
+    if (alreadyPolished)
+    {
+        std::cout << "Already shiney and smooth.  Time to get writing!\n";
+    }
+    else
+    {
+        std::cout << "Let's get that " << nStyle << "nib ready for the page...\n";
+        isPolished = true;
+        std::cout << "All done!\n";
+    }
+}
+
+void FountainPen::Nib::changeNib(std::string newNib)
+{
+    style = newNib;
+}
+
+void FountainPen::writeCharacter(char userChar)
+{
+    std::cout << userChar;
+}
+void FountainPen::drawALine(int x_start, int y_start, int lineLeng)
+{
+    std::cout << x_start << " x ";
+    for (int i = 0; i < lineLeng; i++)
+        {
+            std::cout << "-";
+        }
+    std::cout << " y " << y_start << "\n";
+}
+float FountainPen::getMmNibLength(Nib currentNib)
+{
+    return currentNib.lengthInMm;
+}
+
+float FountainPen::compareNibLength(Nib currentNib, Nib newNib)
+{
+    if (currentNib.lengthInMm < newNib.lengthInMm)
+    {
+        std::cout << "The new nib is longer.\n";
+        return newNib.lengthInMm;
+    }
+    else
+    {
+        std::cout << "The current nib is longer.\n";
+        return currentNib.lengthInMm;
+    }
+}
 
 struct GameBoy
 {
@@ -235,27 +304,76 @@ struct GameBoy
     std::string nameOfInsertedGame = "Pokemon Yellow";
     float volume = 15.0f;
     float batteryConsumptionPercentage = 80.0f;
-    struct GameCartridge
+
+    struct Cartridge
     {
         std::string name = "Battle Toads";
         bool isClean = true;
         std::string cartridgeColor = "grey";
-        int cartridgeMemoryUsed = 8;
+        int maxMemory = {16};
+        int memoryUsed = {7};
         bool isRumblePackEnabled = false;
+        bool isBattleToads = {false};
 
         void saveGameStateToRAM();
         void cleanCartridgeHead(std::string gameToClean);
         bool doYouHaveBattleToads();
     };
 
-    GameCartridge currentGame;
+    Cartridge currentGame;
 
-    void powerOnOrOff();
     float adjustVolume(float adjustAmount);
     double adjustBrightness(double adjustAmount);
-    void insertNewCartridge(GameCartridge oldGame, GameCartridge newGame);
+    void insertNewCartridge(Cartridge newGame);
 
 };
+
+float GameBoy::adjustVolume(float adjAmount)
+{
+    return volume += adjAmount;
+}
+
+double GameBoy::adjustBrightness(double adjAmount)
+{
+    return screenBrightness += adjAmount;
+}
+
+void GameBoy::insertNewCartridge(Cartridge nGame)
+{
+    currentGame = nGame;
+}
+
+void GameBoy::Cartridge::saveGameStateToRAM()
+{
+    if (memoryUsed < maxMemory)
+    {
+        std::cout << "You have saved the game!\n";
+        maxMemory += 1;
+    }
+    std::cout << "There is not space left for a new save...\n";
+    
+}
+
+void GameBoy::Cartridge::cleanCartridgeHead(std::string gameToClean)
+{
+    if (isClean)
+    {
+        std::cout << "Save your breath, this one's already clean!\n";
+    }
+    else
+    {
+        std::cout << "*wind noises...*\n";
+        isClean = true;
+        std::cout << gameToClean << " is all clean!\n";
+    }
+}
+
+bool GameBoy::Cartridge::doYouHaveBattleToads()
+{
+    if (isBattleToads) return true;
+    
+    return false;
+}
 
 struct Camera
 {
@@ -263,25 +381,67 @@ struct Camera
     int screenDiagnoalSize = 3;
     int numOfPixels = 14;
     int numOfButtons = 7;
-    int flashBrightnessEV = 9.0;
+    int flashBrightnessEV = 9;
 
     void emitFlash();
-    int adjustAperture(int adjustAmount);
+    float displayBatteryLvl();
     void captureImage();
 };
+
+void Camera::emitFlash()
+{
+    std::cout << "FLASH " << flashBrightnessEV << " times!\n";
+}
+
+float Camera::displayBatteryLvl()
+{
+    return batteryLevelPercentage;
+}
+
+void Camera::captureImage()
+{
+    std::cout << ">= 1,000 words.";
+}
 
 struct Receiver
 {
     int numOfInputChannels = 2;
+    int currentInputChannel = 1;
     float mainVolume = 35.0;
     int numOfOutputChannels = 4;
+    int currentOutputChannel = 1;
     float trebleVolume = 5.0f;
     float bassVolume = 5.0f;
 
     int changeOutputChannelGroup(int target);
-    void powerOnOrOff();
+    void addInputChannel();
     float changeVolume(float changeAmount);
 };
+
+int Receiver::changeOutputChannelGroup(int t)
+{
+    if (t > numOfOutputChannels)
+    {
+        std::cout << "Invalid channel selection.";
+        return 1;
+    }
+    else
+    {
+        currentOutputChannel = t;
+        return 0;
+    }
+}
+
+void Receiver::addInputChannel()
+{
+    numOfOutputChannels += 1;
+}
+
+float Receiver::changeVolume(float chgAmnt)
+{
+    mainVolume += chgAmnt;
+    return mainVolume;
+}
 
 struct Speakers
 {
@@ -296,6 +456,23 @@ struct Speakers
     void bypassSpeakerDriver();
 };
 
+void Speakers::powerOnOrOff()
+{
+    // TODO
+}
+
+float Speakers::changeVolume(float changeAmount)
+{
+    // TODO
+    return 0.0;
+}
+
+void Speakers::bypassSpeakerDriver()
+{
+    // TODO
+}
+
+
 struct Turntable
 {
     int playbackSpeed = 45;
@@ -308,6 +485,22 @@ struct Turntable
     float moveNeedle(float needleLocation, float moveAmount);
     float changePitchAdjust(float changeAmount);
 };
+
+void Turntable::rotateForward()
+{
+    // TODO
+}
+
+float Turntable::moveNeedle(float needleLoc, float mvAmnt)
+{
+    // TODO
+    return 0.0;
+}
+float changePitchAdjust(float chngAmnt)
+{
+    // TODO
+    return 0.0;
+}
 
 struct Radio
 {
@@ -322,6 +515,19 @@ struct Radio
     void changeWaveListenedType(int targetWave);
 };
 
+void Radio::changeChannel(float trgtChnl)
+{
+    // TODO
+}
+void Radio::demodulateBroadcastWave(float wav)
+{
+    // TODO
+}
+void Radio::changeWaveListenedType(int trgtWave)
+{
+    // TODO
+}
+
 struct CdChanger
 {
     int numDiscsInChanger = 0;
@@ -334,6 +540,19 @@ struct CdChanger
     void changeTrack (int newTrackNumber);
     void pausePlayback();
 };
+
+void CdChanger::playCD(int newCdNum)
+{
+    // TODO
+}
+void CdChanger::changeTrack (int newTrackNum)
+{
+    // TODO
+}
+void CdChanger::pausePlayback()
+{
+    // TODO
+}
 
 struct HomeStereo
 {
@@ -348,6 +567,18 @@ struct HomeStereo
     void playInReverse(Turntable attachedTurntable);
 };
 
+void HomeStereo::playMusic()
+{
+    // TODO
+}
+void HomeStereo::changeFmChannel(float newFmChnl, Radio rad)
+{
+    // TODO
+}
+void HomeStereo::playInReverse(Turntable atchdTable)
+{
+    // TODO
+}
 
 
 
