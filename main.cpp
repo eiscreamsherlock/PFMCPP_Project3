@@ -450,26 +450,27 @@ struct Speakers
     int speakerWattage = 35;
     float wooferDiameter = 5.5f;
     float midDriverDiameter = 3.3f;
+    float volume = 10.0f;
 
-    void powerOnOrOff();
+    void addSpeakers(int spkrsToAdd);
     float changeVolume(float changeAmount);
     void bypassSpeakerDriver();
 };
 
-void Speakers::powerOnOrOff()
+void Speakers::addSpeakers(int numSpkrs)
 {
-    // TODO
+    numOfSpeakers += numSpkrs;
 }
 
-float Speakers::changeVolume(float changeAmount)
+float Speakers::changeVolume(float chngAmnt)
 {
-    // TODO
-    return 0.0;
+    volume += chngAmnt;
+    return volume;
 }
 
 void Speakers::bypassSpeakerDriver()
 {
-    // TODO
+    numOfSpeakers = 0;
 }
 
 
@@ -482,50 +483,78 @@ struct Turntable
     int totalRunTime = 0;
 
     void rotateForward();
-    float moveNeedle(float needleLocation, float moveAmount);
+    float moveNeedle(float moveAmount);    // returns new location
     float changePitchAdjust(float changeAmount);
 };
 
 void Turntable::rotateForward()
 {
-    // TODO
+    if (playDirection != 1)
+        playDirection = 1;
 }
 
-float Turntable::moveNeedle(float needleLoc, float mvAmnt)
+float Turntable::moveNeedle(float mvAmnt)
 {
-    // TODO
-    return 0.0;
+    needLocation += mvAmnt;
+    return needLocation;
 }
-float changePitchAdjust(float chngAmnt)
+float Turntable::changePitchAdjust(float chngAmnt)
 {
-    // TODO
-    return 0.0;
+    pitchAdjustPercent += chngAmnt;
+    return pitchAdjustPercent;
 }
 
 struct Radio
 {
-    float fmChannel = 97.1f;
+    int fmChannel = 971;    // Should be float, but see note in Radio::changeFmChannel def below
     int amChannel = 540;
     int satChannel = 55;
-    int channelPreset = 1;
+    int channelPresets[6] = {};
+    std::string currentWaveType = {"fm"};    // I think this should be an enum, but we haven't covered that yet.
     float broadcastSignalStrengthPercent = 100.0f;
 
-    void changeChannel(float targetChannel);
-    void demodulateBroadcastWave(float wave);
-    void changeWaveListenedType(int targetWave);
+    int changeFmChannel(int targetChannel);
+    void assignNewPreset(int channel, int preset);
+    std::string changeWaveListenedType(std::string targetWave);    // should prob only accept a wave types enum
 };
 
-void Radio::changeChannel(float trgtChnl)
+int Radio::changeFmChannel(int trgtChnl)
 {
-    // TODO
+    /* This *should* be a float. Compare with float threw a warning, but the following also gave implicit cast warnings:
+    int fmCompare = std::round(fmChannel * 10);
+    int trgtCompare = std::round(trgtChannel * 10);
+    if (fmCompare != trgtChnl)
+    ...
+    
+    */
+    
+    if (fmChannel != trgtChnl )
+    {
+        fmChannel = trgtChnl;
+    }
+    return fmChannel;    // returning the channel to confirm the change to whatever calls this.
 }
-void Radio::demodulateBroadcastWave(float wav)
+void Radio::assignNewPreset(int chan, int pres)
 {
-    // TODO
+    if (channelPresets[pres] != 0)
+    {
+        char choice {};
+        std::cout << "Are you sure you want to overwrite the existing preset? [y/n]\n";
+        std::cin >> choice;
+        if (choice == 'y') channelPresets[pres] = chan;
+    }
+    else
+    {
+        channelPresets[pres] = chan;
+    }
 }
-void Radio::changeWaveListenedType(int trgtWave)
+std::string Radio::changeWaveListenedType(std::string trgtWave)
 {
-    // TODO
+    if (trgtWave != currentWaveType )
+    {
+        currentWaveType = trgtWave;
+    }
+    return currentWaveType;
 }
 
 struct CdChanger
@@ -533,25 +562,40 @@ struct CdChanger
     int numDiscsInChanger = 0;
     int maxNumDiscsInChanger = 32;
     int currTrackNumber = 1;
+    int currentDiscNumber = {};
     std::string currentTrackName = "Sister Christian";
     std::string currentDisc = "Midnight Madness";
 
-    void playCD(int newCdNumber);
-    void changeTrack (int newTrackNumber);
+    struct Disc
+    {
+        std::string albumName;
+        std::string firstTrack;
+        int numOfTracks = 12;            // I know this limits all discs to 12 tracks.
+        std::string trackList[12] {};    // but I don't know how to do a dynamic-sized array in C++ yet
+    };
+
+    Disc activeDisk;
+
+    void playCD(int newCdNumber, Disc discToPlay);
+    void changeTrack (int newTrackNumber, Disc currentDisc);
     void pausePlayback();
 };
 
-void CdChanger::playCD(int newCdNum)
+void CdChanger::playCD(int newCdNum, Disc disc)
 {
-    // TODO
+    currentDisc = disc.albumName;
+    currentDiscNumber = newCdNum;
+    currentTrackName = disc.firstTrack;
+    currTrackNumber = 1;
 }
-void CdChanger::changeTrack (int newTrackNum)
+void CdChanger::changeTrack (int newTrackNum, Disc currDisc)
 {
-    // TODO
+    currTrackNumber = newTrackNum;
+    currentTrackName = currDisc.trackList[newTrackNum];
 }
 void CdChanger::pausePlayback()
 {
-    // TODO
+    std::cout << "*SOUND OF SILENCE*\n";
 }
 
 struct HomeStereo
@@ -562,22 +606,23 @@ struct HomeStereo
     Radio radio;
     CdChanger cdChanger;
 
-    void playMusic();
-    void changeFmChannel(float newFmChannel, Radio radio);
+    void insertNewDisc(CdChanger::Disc newDisc);
+    void changeFmChannel(int newFmChannel, Radio radio);
     void playInReverse(Turntable attachedTurntable);
 };
 
-void HomeStereo::playMusic()
+void HomeStereo::insertNewDisc(CdChanger::Disc newDisc)
 {
-    // TODO
+    cdChanger.numDiscsInChanger += 1;
+    cdChanger.playCD(cdChanger.numDiscsInChanger, newDisc);
 }
-void HomeStereo::changeFmChannel(float newFmChnl, Radio rad)
+void HomeStereo::changeFmChannel(int newFmChnl, Radio rad)
 {
-    // TODO
+    rad.changeFmChannel(newFmChnl);
 }
 void HomeStereo::playInReverse(Turntable atchdTable)
 {
-    // TODO
+    atchdTable.playDirection = -1;
 }
 
 
