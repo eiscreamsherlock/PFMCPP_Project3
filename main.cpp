@@ -141,7 +141,15 @@ struct Person
     void run(int howFast, bool startWithLeftFoot)
     {
         if (startWithLeftFoot) 
-            distanceTraveled += (leftFoot.stepSize() + rightFoot.stepSize()) * howFast;
+        {
+            leftFoot.stepForward();
+            rightFoot.stepForward();
+        }
+        else
+        {
+            rightFoot.stepForward();
+            leftFoot.stepForward();
+        }
 
         distanceTraveled += (rightFoot.stepSize() + leftFoot.stepSize()) * howFast;
     }
@@ -229,6 +237,7 @@ struct FountainPen
     void drawALine(int x_start, int y_start, int lengthOfLine);
     float getMmNibLength(Nib currentNib);
     float compareNibLength(Nib currentNib, Nib newNib);
+    void definitelyNotAForLoop(int length);
 };
 
 
@@ -269,15 +278,23 @@ void FountainPen::writeCharacter(char userChar)
 {
     std::cout << userChar;
 }
+
+void FountainPen::definitelyNotAForLoop(int length)
+{
+    if (length > 0)
+    {
+        definitelyNotAForLoop(length - 1);
+        std::cout << "-";
+    }
+}
+
 void FountainPen::drawALine(int x_start, int y_start, int lineLeng)
 {
     std::cout << x_start << " x ";
-    for (int i = 0; i < lineLeng; i++)
-        {
-            std::cout << "-";
-        }
+    FountainPen::definitelyNotAForLoop(lineLeng);
     std::cout << " y " << y_start << "\n";
 }
+
 float FountainPen::getMmNibLength(Nib currentNib)
 {
     return currentNib.lengthInMm;
@@ -290,11 +307,8 @@ float FountainPen::compareNibLength(Nib currentNib, Nib newNib)
         std::cout << "The new nib is longer.\n";
         return newNib.lengthInMm;
     }
-    else
-    {
-        std::cout << "The current nib is longer.\n";
-        return currentNib.lengthInMm;
-    }
+    std::cout << "The current nib is longer.\n";
+    return currentNib.lengthInMm;
 }
 
 struct GameBoy
@@ -425,11 +439,8 @@ int Receiver::changeOutputChannelGroup(int t)
         std::cout << "Invalid channel selection.";
         return 1;
     }
-    else
-    {
-        currentOutputChannel = t;
-        return 0;
-    }
+    currentOutputChannel = t;
+    return 0;
 }
 
 void Receiver::addInputChannel()
