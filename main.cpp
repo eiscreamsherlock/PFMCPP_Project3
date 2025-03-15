@@ -520,12 +520,12 @@ struct Radio
     int fmChannel = 971;    // Should be float, but see note in Radio::changeFmChannel def below
     int amChannel = 540;
     int satChannel = 55;
-    int channelPresets[6] = {};
+    int activeChannelPreset = 1;
     std::string currentWaveType = {"fm"};    // I think this should be an enum, but we haven't covered that yet.
     float broadcastSignalStrengthPercent = 100.0f;
 
     int changeFmChannel(int targetChannel);
-    void assignNewPreset(int channel, int preset);
+    void changeChannelPreset(int preset);
     std::string changeWaveListenedType(std::string targetWave);    // should prob only accept a wave types enum
 };
 
@@ -545,20 +545,11 @@ int Radio::changeFmChannel(int trgtChnl)
     }
     return fmChannel;    // returning the channel to confirm the change to whatever calls this.
 }
-void Radio::assignNewPreset(int chan, int pres)
+void Radio::changeChannelPreset(int pres)
 {
-    if (channelPresets[pres] != 0)
-    {
-        char choice {};
-        std::cout << "Are you sure you want to overwrite the existing preset? [y/n]\n";
-        std::cin >> choice;
-        if (choice == 'y') channelPresets[pres] = chan;
-    }
-    else
-    {
-        channelPresets[pres] = chan;
-    }
+    activeChannelPreset = pres;
 }
+
 std::string Radio::changeWaveListenedType(std::string trgtWave)
 {
     if (trgtWave != currentWaveType )
