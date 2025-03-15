@@ -109,6 +109,51 @@ struct CarWash
  */
 
 
+struct Person
+{
+    int age;
+    int height;
+    float hairLength;
+    float GPA;
+    unsigned int SATScore;
+    int distanceTraveled;
+
+    struct Foot
+    {
+        int shoeSize{12};
+        char shoeWidth;
+        int strideLength{20};
+        int footLabel;
+    
+        int stepForward()
+        {
+            return stepSize();
+        }
+        int stepSize()
+        {
+            return shoeSize + strideLength;
+        }
+    };
+
+    Foot leftFoot;
+    Foot rightFoot;
+
+    void run(int howFast, bool startWithLeftFoot)
+    {
+        if (startWithLeftFoot) 
+        {
+            leftFoot.stepForward();
+            rightFoot.stepForward();
+        }
+        else
+        {
+            rightFoot.stepForward();
+            leftFoot.stepForward();
+        }
+
+        distanceTraveled += (rightFoot.stepSize() + leftFoot.stepSize()) * howFast;
+    }
+};
 
 
 
@@ -131,368 +176,456 @@ struct CarWash
  This usually means you have to use identical types for all variables used in an expression that is producing that conversion warning.
  */
 
-/*
-Thing 1) Sword
-5 properties:
-    1) length (float)
-    2) weight (float)
-    3) material (std::string)
-    4) time since last sharpening (int)
-    5) width of crossguard (float)
-3 things it can do:
-    1) chop
-    2) stab
-    3) sheathe/unsheathe
-*/
+
 struct Sword
 {
-//     1) length (float)
-    int swordLengthInCm = 82;
-//     2) weight (float)
-    float swordWeightnGrams = 853.8f;
-//     3) material (std::string)
-    std::string swordMaterial = "carbon steel";
-//     4) time since last sharpening (int)
+    int lengthInCm = 82;
+    float weightnGrams = 853.8f;
+    std::string material = "glorious nippon steel";
     int minSinceLastSharpen = 1440;
-//     5) width of crossguard (float)
     int crossguardWidth = 35;
-// 3 things it can do:
-//     1) chop
-    void chop();
-//     2) stab
+
+    bool longOrShort();
     void stab();
-//     3) sheathe/unsheathe
-    void sheatheOrUnsheathe();
+    bool needSharpen();
 };
-/*
-Thing 2) Fountain Pen
-5 properties:
-    1) Color of ink (std::string)
-    2) Amount of ink in resevoir (float)
-    3) Time since last cleaning (int)
-    4) Nib width (float)
-    5) Nib feed capacity (float)
-3 things it can do:
-    1) Display current ink level
-    2) Write a character
-    3) Draw a line
-*/
+
+bool Sword::longOrShort()
+{
+    if (lengthInCm < 40) return true;
+    return false;
+}
+
+bool Sword::needSharpen()
+{
+    if (minSinceLastSharpen > 360) return true;
+    return false;
+}
+
+void Sword::stab()
+{
+    std::cout << "I stab at thee!\t";
+    std::cout << "->------ \n";
+}
+
+
 struct FountainPen
 {
-//     1) Color of ink (std::string)
     std::string inkColor = "black";
-//     2) Amount of ink in resevoir (float)
     float inkRemaining = 30.0f;
-//     3) Time since last cleaning (int)
     int daysSinceLastClean = 30;
-//     4) Nib width (float)
     float nibWidthInMm = 10.5f;
-//     5) Nib feed capacity (float)
-    float nibFeedCapacity = 30.0f;
+    float feedCapacity = 30.0f;
+
     struct Nib
     {
-        std::string nibStyle = "fine";
+        std::string style = "fine";
         bool isPolished = false;
         bool needsCleaning = false;
-        int lengthOfNibInMm = 25;
+        float lengthInMm = 25;
         double mmDistanceBetweenTines = 0.001;
 
-        void cleanNib(bool needsCleaning);    // Pass in needsCleaning to potentially skip if already clean
+        void cleanNib(bool toClean);
         void polishNib(std::string nibStyle, bool isPolished);
-        void changeNib(std::string oldNib, std::string newNib);
+        void changeNib(std::string newNib);
     };
-// 3 things it can do:
+
     Nib currentInstalledNib;
-//     1) Display current ink level
     int displayCurrentInkLvl();
-//     2) Write a character
+
     void writeCharacter(char userCharacter);
-//     3) Draw a line
     void drawALine(int x_start, int y_start, int lengthOfLine);
-    float getMmNibWidth(Nib currentNib);        // return Nib size
-    float compareFeedCapacity(Nib currentNib, Nib newNib);
+    float getMmNibLength(Nib currentNib);
+    float compareNibLength(Nib currentNib, Nib newNib);
+    void definitelyNotAForLoop(int length);
 };
-/*
-Thing 3) Gameboy
-5 properties:
-    1) screen size (int)
-    2) screen brightness (double)
-    3) name of inserted game (std::string)
-    4) volume (float)
-    5) battery percentage remaining (float)
-3 things it can do:
-    1) power on/off
-    2) adjust volume
-    3) adjust brightness
-*/
+
+
+void FountainPen::Nib::cleanNib(bool needClean)
+{
+    if (needClean)
+    {
+        std::cout << "All clean!\n";
+        needsCleaning = false;
+    }
+    else
+    {
+        std::cout << "Nothing to do, already clean!\n";
+    }
+    
+}
+
+void FountainPen::Nib::polishNib(std::string nStyle, bool alreadyPolished)
+{
+    if (alreadyPolished)
+    {
+        std::cout << "Already shiney and smooth.  Time to get writing!\n";
+    }
+    else
+    {
+        std::cout << "Let's get that " << nStyle << "nib ready for the page...\n";
+        isPolished = true;
+        std::cout << "All done!\n";
+    }
+}
+
+void FountainPen::Nib::changeNib(std::string newNib)
+{
+    style = newNib;
+}
+
+void FountainPen::writeCharacter(char userChar)
+{
+    std::cout << userChar;
+}
+
+void FountainPen::definitelyNotAForLoop(int length)
+{
+    if (length > 0)
+    {
+        definitelyNotAForLoop(length - 1);
+        std::cout << "-";
+    }
+}
+
+void FountainPen::drawALine(int x_start, int y_start, int lineLeng)
+{
+    std::cout << x_start << " x ";
+    FountainPen::definitelyNotAForLoop(lineLeng);
+    std::cout << " y " << y_start << "\n";
+}
+
+float FountainPen::getMmNibLength(Nib currentNib)
+{
+    return currentNib.lengthInMm;
+}
+
+float FountainPen::compareNibLength(Nib currentNib, Nib newNib)
+{
+    if (currentNib.lengthInMm < newNib.lengthInMm)
+    {
+        std::cout << "The new nib is longer.\n";
+        return newNib.lengthInMm;
+    }
+    std::cout << "The current nib is longer.\n";
+    return currentNib.lengthInMm;
+}
+
 struct GameBoy
 {
-//     1) screen size (int)
     int screenSize = 5;
-//     2) screen brightness (double)
     double screenBrightness = 75.0;
-//     3) name of inserted game (std::string)
     std::string nameOfInsertedGame = "Pokemon Yellow";
-//     4) volume (float)
     float volume = 15.0f;
-//     5) battery percentage remaining (float)
     float batteryConsumptionPercentage = 80.0f;
-    struct GameCartridge
+
+    struct Cartridge
     {
         std::string name = "Battle Toads";
         bool isClean = true;
         std::string cartridgeColor = "grey";
-        int cartridgeMemoryUsed = 8;
+        int maxMemory = {16};
+        int memoryUsed = {7};
         bool isRumblePackEnabled = false;
+        bool isBattleToads = {false};
 
         void saveGameStateToRAM();
         void cleanCartridgeHead(std::string gameToClean);
-        bool doYouHaveBattleToads();        // Tells us if they have Battle Toads
+        bool doYouHaveBattleToads();
     };
-// 3 things it can do:
-//     1) power on/off
 
-    GameCartridge currentGame;
-    void powerOnOrOff();
-//     2) adjust volume
-    float adjustVolume(float adjustAmount); // return updated volume
-//     3) adjust brightness
-    double adjustBrightness(double adjustAmount); // return updated brightness
-    void insertNewCartridge(GameCartridge oldGame, GameCartridge newGame);
+    Cartridge currentGame;
+
+    float adjustVolume(float adjustAmount);
+    double adjustBrightness(double adjustAmount);
+    void insertNewCartridge(Cartridge newGame);
 
 };
-/*
-Thing 4) Camera
-5 properties:
-    1) Battery level (float)
-    2) Screen size, area (int)
-    3) Number of megapixels (int)
-    4) Number of buttons (int)
-    5) flash brightness (float)
-3 things it can do:
-    1) emit flash
-    2) adjust aperture
-    3) capture image
-*/
+
+float GameBoy::adjustVolume(float adjAmount)
+{
+    return volume += adjAmount;
+}
+
+double GameBoy::adjustBrightness(double adjAmount)
+{
+    return screenBrightness += adjAmount;
+}
+
+void GameBoy::insertNewCartridge(Cartridge nGame)
+{
+    currentGame = nGame;
+}
+
+void GameBoy::Cartridge::saveGameStateToRAM()
+{
+    if (memoryUsed < maxMemory)
+    {
+        std::cout << "You have saved the game!\n";
+        maxMemory += 1;
+    }
+    std::cout << "There is not space left for a new save...\n";
+    
+}
+
+void GameBoy::Cartridge::cleanCartridgeHead(std::string gameToClean)
+{
+    if (isClean)
+    {
+        std::cout << "Save your breath, this one's already clean!\n";
+    }
+    else
+    {
+        std::cout << "*wind noises...*\n";
+        isClean = true;
+        std::cout << gameToClean << " is all clean!\n";
+    }
+}
+
+bool GameBoy::Cartridge::doYouHaveBattleToads()
+{
+    if (isBattleToads) return true;
+    
+    return false;
+}
+
 struct Camera
 {
-//     1) Battery level (float)
     float batteryLevelPercentage = 100.0f;
-//     2) Screen size, area (int)
     int screenDiagnoalSize = 3;
-//     3) Number of megapixels (int)
     int numOfPixels = 14;
-//     4) Number of buttons (int)
     int numOfButtons = 7;
-//     5) flash brightness (float)
-    int flashBrightnessEV = 9.0;
-// 3 things it can do:
-//     1) emit flash
+    int flashBrightnessEV = 9;
+
     void emitFlash();
-//     2) adjust aperture
-    int adjustAperture(int adjustAmount);    // return new aperture
-//     3) capture image
-    void captureImage();                    // saves to disk, but returns no value
+    float displayBatteryLvl();
+    void captureImage();
 };
-/*
-Thing 5) receiver
-5 properties:
-    1) number of input channels (int)
-    2) main volume (float)
-    3) number of output channels (int)
-    4) treble volume (float)
-    5) bass volume (float)
-3 things it can do:
-    1) change output channel group
-    2) power on/off
-    3) change volume
-*/
+
+void Camera::emitFlash()
+{
+    std::cout << "FLASH " << flashBrightnessEV << " times!\n";
+}
+
+float Camera::displayBatteryLvl()
+{
+    return batteryLevelPercentage;
+}
+
+void Camera::captureImage()
+{
+    std::cout << ">= 1,000 words.";
+}
+
 struct Receiver
 {
-//     1) number of input channels (int)
     int numOfInputChannels = 2;
-//     2) main volume (float)
+    int currentInputChannel = 1;
     float mainVolume = 35.0;
-//     3) number of output channels (int)
     int numOfOutputChannels = 4;
-//     4) treble volume (float)
+    int currentOutputChannel = 1;
     float trebleVolume = 5.0f;
-//     5) bass volume (float)
     float bassVolume = 5.0f;
-// 3 things it can do:
-//     1) change output channel group
-    int changeOutputChannelGroup(int target);    // return active channel group
-//     2) power on/off
-    void powerOnOrOff();
-//     3) change volume
-    float changeVolume(float changeAmount);      // return updated volume
+
+    int changeOutputChannelGroup(int target);
+    void addInputChannel();
+    float changeVolume(float changeAmount);
 };
-/*
-Thing 6) speakers
-5 properties:
-    1) number of speakers (int)
-    2) diameter of tweeter (float)
-    3) power (in watts) (int)
-    4) diameter of woofer (float)
-    5) diameter of midrange driver (float)
-3 things it can do:
-    1) power on/off
-    2) adjust output volume
-    3) bypass driver (for headphone use)
-*/
+
+int Receiver::changeOutputChannelGroup(int t)
+{
+    if (t > numOfOutputChannels)
+    {
+        std::cout << "Invalid channel selection.";
+        return 1;
+    }
+    currentOutputChannel = t;
+    return 0;
+}
+
+void Receiver::addInputChannel()
+{
+    numOfOutputChannels += 1;
+}
+
+float Receiver::changeVolume(float chgAmnt)
+{
+    mainVolume += chgAmnt;
+    return mainVolume;
+}
+
 struct Speakers
 {
-//     1) number of speakers (int)
     int numOfSpeakers = 2;
-//     2) diameter of tweeter (float)
     float tweeterDiameter = 2.0f;
-//     3) power (in watts) (int)
     int speakerWattage = 35;
-//     4) diameter of woofer (float)
     float wooferDiameter = 5.5f;
-//     5) diameter of midrange driver (float)
     float midDriverDiameter = 3.3f;
-// 3 things it can do:
-//     1) power on/off
-    void powerOnOrOff();
-//     2) adjust output volume
-    float changeVolume(float changeAmount);    // return the new volume
-//     3) bypass driver (for headphone use)
+    float volume = 10.0f;
+
+    void addSpeakers(int spkrsToAdd);
+    float changeVolume(float changeAmount);
     void bypassSpeakerDriver();
 };
-/*
-Thing 7) turntable
-5 properties:
-    1) speed (rotation per min) (int)
-    2) pitch adjust percent (float)
-    3) rotation direction (int)
-    4) needle location (float)
-    5) running time (int)
-3 things it can do:
-    1) rotate forward
-    2) move needle
-    3) change pitch adjust percentage
-*/
+
+void Speakers::addSpeakers(int numSpkrs)
+{
+    numOfSpeakers += numSpkrs;
+}
+
+float Speakers::changeVolume(float chngAmnt)
+{
+    volume += chngAmnt;
+    return volume;
+}
+
+void Speakers::bypassSpeakerDriver()
+{
+    numOfSpeakers = 0;
+}
+
+
 struct Turntable
 {
-//     1) speed (rotation per min) (int)
     int playbackSpeed = 45;
-//     2) pitch adjust percent (float)
     float pitchAdjustPercent = 0.0f;
-//     3) rotation direction (int)
     int playDirection = 1;
-//     4) needle location (float)
     float needLocation = 1.0f;
-//     5) running time (int)
     int totalRunTime = 0;
-// 3 things it can do:
-//     1) rotate forward
+
     void rotateForward();
-//     2) move needle
-    float moveNeedle(float needleLocation, float moveAmount);    // return new location
-//     3) change pitch adjust percentage
-    float changePitchAdjust(float changeAmount);                // return new pitch adjust amount
+    float moveNeedle(float moveAmount);    // returns new location
+    float changePitchAdjust(float changeAmount);
 };
-/*
-Thing 8) radio
-5 properties:
-    1) fm channel (float)
-    2) am channel (int)
-    3) satellite station (int)
-    4) channel preset (int)
-    5) current signal strength (float)
-3 things it can do:
-    1) change channel
-    2) demodulate broadcast wave
-    3) change wave type (am/fm/xm)
-*/
+
+void Turntable::rotateForward()
+{
+    if (playDirection != 1)
+        playDirection = 1;
+}
+
+float Turntable::moveNeedle(float mvAmnt)
+{
+    needLocation += mvAmnt;
+    return needLocation;
+}
+float Turntable::changePitchAdjust(float chngAmnt)
+{
+    pitchAdjustPercent += chngAmnt;
+    return pitchAdjustPercent;
+}
+
 struct Radio
 {
-//     1) fm channel (float)
-    float fmChannel = 97.1f;
-//     2) am channel (int)
+    int fmChannel = 971;    // Should be float, but see note in Radio::changeFmChannel def below
     int amChannel = 540;
-//     3) satellite station (int)
     int satChannel = 55;
-//     4) channel preset (int)
-    int channelPreset = 1;
-//     5) current signal strength (float)
+    int activeChannelPreset = 1;
+    std::string currentWaveType = {"fm"};    // I think this should be an enum, but we haven't covered that yet.
     float broadcastSignalStrengthPercent = 100.0f;
-// 3 things it can do:
-//     1) change channel
-    void changeChannel(float targetChannel);
-//     2) demodulate broadcast wave
-    void demodulateBroadcastWave(float wave);
-//     3) change wave type (am/fm/xm)
-    void changeWaveListenedType(int targetWave);
+
+    int changeFmChannel(int targetChannel);
+    void changeChannelPreset(int preset);
+    std::string changeWaveListenedType(std::string targetWave);    // should prob only accept a wave types enum
 };
-/*
-Thing 9) cd changer
-5 properties:
-    1) current number of cds in changer (int)
-    2) max number of cds (int)
-    3) current track number (int)
-    4) current track name (std::string)
-    5) current cd in reader (std::string)
-3 things it can do:
-    1) play cd
-    2) change track
-    3) pause playback
-*/
+
+int Radio::changeFmChannel(int trgtChnl)
+{
+    /* This *should* be a float. Compare with float threw a warning, but the following also gave implicit cast warnings:
+    int fmCompare = std::round(fmChannel * 10);
+    int trgtCompare = std::round(trgtChannel * 10);
+    if (fmCompare != trgtChnl)
+    ...
+    
+    */
+    
+    if (fmChannel != trgtChnl )
+    {
+        fmChannel = trgtChnl;
+    }
+    return fmChannel;    // returning the channel to confirm the change to whatever calls this.
+}
+void Radio::changeChannelPreset(int pres)
+{
+    activeChannelPreset = pres;
+}
+
+std::string Radio::changeWaveListenedType(std::string trgtWave)
+{
+    if (trgtWave != currentWaveType )
+    {
+        currentWaveType = trgtWave;
+    }
+    return currentWaveType;
+}
+
 struct CdChanger
 {
-//     1) current number of cds in changer (int)
     int numDiscsInChanger = 0;
-//     2) max number of cds (int)
     int maxNumDiscsInChanger = 32;
-//     3) current track number (int)
     int currTrackNumber = 1;
-//     4) current track name (std::string)
+    int currentDiscNumber = {};
     std::string currentTrackName = "Sister Christian";
-//     5) current cd in reader (std::string)
     std::string currentDisc = "Midnight Madness";
-// 3 things it can do:
-//     1) play cd
-    void playCD(int newCdNumber);
-//     2) change track
-    void changeTrack (int newTrackNumber);
-//     3) pause playback
+
+    struct Disc
+    {
+        std::string albumName;
+        std::string firstTrack;
+        int numOfTracks = 12;            // I know this limits all discs to 12 tracks.
+        std::string trackList[12] {};    // but I don't know how to do a dynamic-sized array in C++ yet
+    };
+
+    Disc activeDisk;
+
+    void playCD(int newCdNumber, Disc discToPlay);
+    void changeTrack (int newTrackNumber, Disc currentDisc);
     void pausePlayback();
 };
-/*
-Thing 10) Home stereo
-5 properties:
-    1) receiver
-    2) speakers
-    3) turntable
-    4) radio
-    5) cd changer
-3 things it can do:
-    1) play music
-    2) change FM channel
-    3) play backwards (to find the devil's music)
-*/
+
+void CdChanger::playCD(int newCdNum, Disc disc)
+{
+    currentDisc = disc.albumName;
+    currentDiscNumber = newCdNum;
+    currentTrackName = disc.firstTrack;
+    currTrackNumber = 1;
+}
+void CdChanger::changeTrack (int newTrackNum, Disc currDisc)
+{
+    currTrackNumber = newTrackNum;
+    currentTrackName = currDisc.trackList[newTrackNum];
+}
+void CdChanger::pausePlayback()
+{
+    std::cout << "*SOUND OF SILENCE*\n";
+}
+
 struct HomeStereo
 {
-//     1) receiver
     Receiver receiver;
-//     2) speakers
     Speakers speakers;
-//     3) turntable
     Turntable turntable;
-//     4) radio
     Radio radio;
-//     5) cd changer
     CdChanger cdChanger;
-// 3 things it can do:
-//     1) play music
-    void playMusic();
-//     2) change FM channel
-    void changeFmChannel(float newFmChannel, Radio radio);
-//     3) play backwards (to find the devil's music)
+
+    void insertNewDisc(CdChanger::Disc newDisc);
+    void changeFmChannel(int newFmChannel, Radio radio);
     void playInReverse(Turntable attachedTurntable);
 };
 
+void HomeStereo::insertNewDisc(CdChanger::Disc newDisc)
+{
+    cdChanger.numDiscsInChanger += 1;
+    cdChanger.playCD(cdChanger.numDiscsInChanger, newDisc);
+}
+void HomeStereo::changeFmChannel(int newFmChnl, Radio rad)
+{
+    rad.changeFmChannel(newFmChnl);
+}
+void HomeStereo::playInReverse(Turntable atchdTable)
+{
+    atchdTable.playDirection = -1;
+}
 
 
 
