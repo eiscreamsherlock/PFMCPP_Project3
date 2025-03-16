@@ -90,7 +90,7 @@ struct Sword
 
 Sword::Sword()
 {
-    
+    std::cout << "Sword being constructed!\n";
 }
 
 bool Sword::longOrShort()
@@ -147,12 +147,12 @@ struct FountainPen
 
 FountainPen::FountainPen()
 {
-    
+    std::cout << "FountainPen is being constructed!\n";
 }
 
 FountainPen::Nib::Nib()
 {
-    
+    std::cout << "Nib is being constructed!\n";
 }
 
 void FountainPen::Nib::cleanNib(bool needClean)
@@ -166,7 +166,6 @@ void FountainPen::Nib::cleanNib(bool needClean)
     {
         std::cout << "Nothing to do, already clean!\n";
     }
-    
 }
 
 void FountainPen::Nib::polishNib(std::string nStyle, bool alreadyPolished)
@@ -258,14 +257,14 @@ struct GameBoy
 
 };
 
-GameBoy::Cartridge::Cartridge()   // Getting error w/ sub-class constructor that is declared by parent
+GameBoy::Cartridge::Cartridge()
 {
-    
+    std::cout << "Cartridge is being constructed!\n";
 }
 
 GameBoy::GameBoy()
 {
-    
+    std::cout << "GameBoy is being constructed!\n";
 }
 
 
@@ -332,7 +331,7 @@ struct Camera
 
 Camera::Camera()
 {
-    
+    std::cout << "Camera is being constructed!\n";
 }
 
 void Camera::emitFlash()
@@ -368,7 +367,7 @@ struct Receiver
 
 Receiver::Receiver()
 {
-    
+    std::cout << "Receiver is being constructed!\n";
 }
 
 int Receiver::changeOutputChannelGroup(int t)
@@ -410,7 +409,7 @@ struct Speakers
 
 Speakers::Speakers()
 {
-    
+    std::cout << "Speakers is being constructed!\n";
 }
 
 void Speakers::addSpeakers(int numSpkrs)
@@ -446,7 +445,7 @@ struct Turntable
 
 Turntable::Turntable()
 {
-    
+    std::cout << "Turntable is being constructed!\n";
 }
 
 void Turntable::rotateForward()
@@ -469,7 +468,7 @@ float Turntable::changePitchAdjust(float chngAmnt)
 struct Radio
 {
     Radio();
-    int fmChannel = 971;    // Should be float, but see note in Radio::changeFmChannel def below
+    int fmChannel = 971;
     int amChannel = 540;
     int satChannel = 55;
     int activeChannelPreset = 1;
@@ -483,19 +482,11 @@ struct Radio
 
 Radio::Radio()
 {
-    
+    std::cout << "Radio is being constructed!\n";
 }
 
 int Radio::changeFmChannel(int trgtChnl)
 {
-    /* This *should* be a float. Compare with float threw a warning, but the following also gave implicit cast warnings:
-    int fmCompare = std::round(fmChannel * 10);
-    int trgtCompare = std::round(trgtChannel * 10);
-    if (fmCompare != trgtChnl)
-    ...
-    
-    */
-    
     if (fmChannel != trgtChnl )
     {
         fmChannel = trgtChnl;
@@ -544,12 +535,12 @@ struct CdChanger
 
 CdChanger::Disc::Disc()
 {
-    
+    std::cout << "Disc is being constructed!\n";
 }
 
 CdChanger::CdChanger()
 {
-    
+    std::cout << "CdChanger is being constructed!\n";
 }
 
 void CdChanger::playCD(int newCdNum, Disc disc)
@@ -585,7 +576,7 @@ struct HomeStereo
 
 HomeStereo::HomeStereo()
 {
-    
+    std::cout << "HomeStereo is being constructed!\n";
 }
 
 void HomeStereo::insertNewDisc(CdChanger::Disc newDisc)
