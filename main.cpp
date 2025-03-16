@@ -81,11 +81,17 @@ struct Sword
     std::string material = "glorious nippon steel";
     int minSinceLastSharpen = 1440;
     int crossguardWidth = 35;
+    Sword();
 
     bool longOrShort();
     void stab();
     bool needSharpen();
 };
+
+Sword::Sword()
+{
+    
+}
 
 bool Sword::longOrShort()
 {
@@ -108,6 +114,7 @@ void Sword::stab()
 
 struct FountainPen
 {
+    FountainPen();
     std::string inkColor = "black";
     float inkRemaining = 30.0f;
     int daysSinceLastClean = 30;
@@ -116,6 +123,7 @@ struct FountainPen
 
     struct Nib
     {
+        Nib();
         std::string style = "fine";
         bool isPolished = false;
         bool needsCleaning = false;
@@ -137,6 +145,15 @@ struct FountainPen
     void definitelyNotAForLoop(int length);
 };
 
+FountainPen::FountainPen()
+{
+    
+}
+
+FountainPen::Nib::Nib()
+{
+    
+}
 
 void FountainPen::Nib::cleanNib(bool needClean)
 {
@@ -210,6 +227,7 @@ float FountainPen::compareNibLength(Nib currentNib, Nib newNib)
 
 struct GameBoy
 {
+    GameBoy();
     int screenSize = 5;
     double screenBrightness = 75.0;
     std::string nameOfInsertedGame = "Pokemon Yellow";
@@ -218,6 +236,7 @@ struct GameBoy
 
     struct Cartridge
     {
+        Cartridge();
         std::string name = "Battle Toads";
         bool isClean = true;
         std::string cartridgeColor = "grey";
@@ -238,6 +257,17 @@ struct GameBoy
     void insertNewCartridge(Cartridge newGame);
 
 };
+
+GameBoy::Cartridge::Cartridge()   // Getting error w/ sub-class constructor that is declared by parent
+{
+    
+}
+
+GameBoy::GameBoy()
+{
+    
+}
+
 
 float GameBoy::adjustVolume(float adjAmount)
 {
@@ -293,11 +323,17 @@ struct Camera
     int numOfPixels = 14;
     int numOfButtons = 7;
     int flashBrightnessEV = 9;
+    Camera();
 
     void emitFlash();
     float displayBatteryLvl();
     void captureImage();
 };
+
+Camera::Camera()
+{
+    
+}
 
 void Camera::emitFlash()
 {
@@ -316,6 +352,7 @@ void Camera::captureImage()
 
 struct Receiver
 {
+    Receiver();
     int numOfInputChannels = 2;
     int currentInputChannel = 1;
     float mainVolume = 35.0;
@@ -328,6 +365,11 @@ struct Receiver
     void addInputChannel();
     float changeVolume(float changeAmount);
 };
+
+Receiver::Receiver()
+{
+    
+}
 
 int Receiver::changeOutputChannelGroup(int t)
 {
@@ -353,6 +395,7 @@ float Receiver::changeVolume(float chgAmnt)
 
 struct Speakers
 {
+    Speakers();
     int numOfSpeakers = 2;
     float tweeterDiameter = 2.0f;
     int speakerWattage = 35;
@@ -364,6 +407,11 @@ struct Speakers
     float changeVolume(float changeAmount);
     void bypassSpeakerDriver();
 };
+
+Speakers::Speakers()
+{
+    
+}
 
 void Speakers::addSpeakers(int numSpkrs)
 {
@@ -384,6 +432,7 @@ void Speakers::bypassSpeakerDriver()
 
 struct Turntable
 {
+    Turntable();
     int playbackSpeed = 45;
     float pitchAdjustPercent = 0.0f;
     int playDirection = 1;
@@ -394,6 +443,11 @@ struct Turntable
     float moveNeedle(float moveAmount);    // returns new location
     float changePitchAdjust(float changeAmount);
 };
+
+Turntable::Turntable()
+{
+    
+}
 
 void Turntable::rotateForward()
 {
@@ -414,6 +468,7 @@ float Turntable::changePitchAdjust(float chngAmnt)
 
 struct Radio
 {
+    Radio();
     int fmChannel = 971;    // Should be float, but see note in Radio::changeFmChannel def below
     int amChannel = 540;
     int satChannel = 55;
@@ -425,6 +480,11 @@ struct Radio
     void changeChannelPreset(int preset);
     std::string changeWaveListenedType(std::string targetWave);    // should prob only accept a wave types enum
 };
+
+Radio::Radio()
+{
+    
+}
 
 int Radio::changeFmChannel(int trgtChnl)
 {
@@ -458,6 +518,7 @@ std::string Radio::changeWaveListenedType(std::string trgtWave)
 
 struct CdChanger
 {
+    CdChanger();
     int numDiscsInChanger = 0;
     int maxNumDiscsInChanger = 32;
     int currTrackNumber = 1;
@@ -467,6 +528,7 @@ struct CdChanger
 
     struct Disc
     {
+        Disc();
         std::string albumName;
         std::string firstTrack;
         int numOfTracks = 12;            // I know this limits all discs to 12 tracks.
@@ -479,6 +541,16 @@ struct CdChanger
     void changeTrack (int newTrackNumber, Disc currentDisc);
     void pausePlayback();
 };
+
+CdChanger::Disc::Disc()
+{
+    
+}
+
+CdChanger::CdChanger()
+{
+    
+}
 
 void CdChanger::playCD(int newCdNum, Disc disc)
 {
@@ -499,6 +571,7 @@ void CdChanger::pausePlayback()
 
 struct HomeStereo
 {
+    HomeStereo();
     Receiver receiver;
     Speakers speakers;
     Turntable turntable;
@@ -509,6 +582,11 @@ struct HomeStereo
     void changeFmChannel(int newFmChannel, Radio radio);
     void playInReverse(Turntable attachedTurntable);
 };
+
+HomeStereo::HomeStereo()
+{
+    
+}
 
 void HomeStereo::insertNewDisc(CdChanger::Disc newDisc)
 {
