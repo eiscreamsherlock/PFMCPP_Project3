@@ -108,7 +108,7 @@ bool Sword::needSharpen()
 void Sword::stab()
 {
     std::cout << "I stab at thee!\t";
-    std::cout << "\t->------ \n\n";
+    std::cout << "\t->------ \n\n";   // <---- This is not a typo
 }
 
 
