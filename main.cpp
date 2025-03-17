@@ -45,20 +45,22 @@ int main()
 struct Sword
 {
     Sword();
-    int lengthInCm = 82;
+    int lengthInCm, minSinceLastSharpen, crossguardWidth;
     float weightnGrams = 853.8f;
-    std::string material = "glorious nippon steel";
-    int minSinceLastSharpen = 1440;
-    int crossguardWidth = 35;
+    std::string material;
 
     bool longOrShort();
     void stab();
     bool needSharpen();
 };
 
-Sword::Sword()
+Sword::Sword() :
+lengthInCm(82), 
+minSinceLastSharpen(1440),
+crossguardWidth(35)
 {
-    std::cout << "Sword being constructed!\n";
+    material = "glorious nippon steel";
+    std::cout << "Sword is being constructed with " << lengthInCm << " centimeters in length!\n";
 }
 
 bool Sword::longOrShort()
@@ -84,17 +86,14 @@ struct FountainPen
 {
     FountainPen();
     std::string inkColor = "black";
-    float inkRemaining = 30.0f;
-    int daysSinceLastClean = 30;
-    float nibWidthInMm = 10.5f;
-    float feedCapacity = 30.0f;
+    float inkRemaining, nibWidthInMm, feedCapacity;
+    int daysSinceLastClean;
 
     struct Nib
     {
         Nib();
         std::string style = "extra fine";
-        bool isPolished = false;
-        bool needsCleaning = false;
+        bool  needsCleaning, isPolished; 
         float lengthInMm = 25;
         double mmDistanceBetweenTines = 0.001;
 
@@ -109,15 +108,21 @@ struct FountainPen
     void drawALine(int x_start, int y_start, int lengthOfLine);
     float getMmNibLength(Nib currentNib);
     float compareNibLength(Nib currentNib, Nib newNib);
-    void definitelyNotAForLoop(int length);        // This is a helper function, not implementing below
+    void definitelyNotAForLoop(int length);        // This is a helper function, not implementing in main()
 };
 
-FountainPen::FountainPen()
+FountainPen::FountainPen() :
+inkRemaining(30.0f),
+nibWidthInMm(10.5f),
+feedCapacity(30.0f)
 {
+    daysSinceLastClean = 30;
     std::cout << "FountainPen is being constructed!\n";
 }
 
-FountainPen::Nib::Nib()
+FountainPen::Nib::Nib() :
+needsCleaning(false),        // New nibs are hopefully clean by default
+isPolished(false)            // but not necessarily polished
 {
     std::cout << "Nib is being constructed!\n";
 }
@@ -194,22 +199,18 @@ float FountainPen::compareNibLength(Nib currentNib, Nib newNib)
 struct GameBoy
 {
     GameBoy();
-    int screenSize = 5;
+    int screenSize;
     double screenBrightness = 75.0;
     std::string nameOfInsertedGame = "Pokemon Yellow";
-    float volume = 15.0f;
-    float batteryConsumptionPercentage = 80.0f;
+    float volume, batteryConsumptionPercentage; 
 
     struct Cartridge
     {
         Cartridge();
         std::string name = "Battle Toads";
-        bool isClean = true;
         std::string cartridgeColor = "grey";
-        int maxMemory = {16};
-        int memoryUsed = {7};
-        bool isRumblePackEnabled = false;
-        bool isBattleToads = {false};
+        bool isRumblePackEnabled, isBattleToads, isClean;
+        int maxMemory, memoryUsed;
 
         void saveGameStateToRAM();
         void cleanCartridgeHead(Cartridge cName);
@@ -218,19 +219,28 @@ struct GameBoy
 
     Cartridge currentGame;
 
+    void howBigIsScreen();
     float adjustVolume(float adjustAmount);
     double adjustBrightness(double adjustAmount);
     void insertNewCartridge(Cartridge newGame);
 
 };
 
-GameBoy::Cartridge::Cartridge()
+GameBoy::Cartridge::Cartridge() :
+isRumblePackEnabled(false),
+isBattleToads(false),
+maxMemory(16),
+memoryUsed(7)
 {
+    isClean = true;
     std::cout << "Cartridge is being constructed!\n";
 }
 
-GameBoy::GameBoy()
+GameBoy::GameBoy() :
+volume(15.0f),
+batteryConsumptionPercentage(80.0f)
 {
+    screenSize = 5;
     std::cout << "GameBoy is being constructed!\n";
 }
 
@@ -248,6 +258,11 @@ double GameBoy::adjustBrightness(double adjAmount)
 void GameBoy::insertNewCartridge(Cartridge nGame)
 {
     currentGame = nGame;
+}
+
+void GameBoy::howBigIsScreen()
+{
+    std::cout << "This Gameboy has a " << screenSize << " sized screen.\n";
 }
 
 void GameBoy::Cartridge::saveGameStateToRAM()
@@ -287,11 +302,8 @@ bool GameBoy::Cartridge::doYouHaveBattleToads()
 
 struct Camera
 {
-    float batteryLevelPercentage = 100.0f;
-    int screenDiagnoalSize = 3;
-    int numOfPixels = 14;
-    int numOfButtons = 7;
-    int flashBrightnessEV = 9;
+    float batteryLevelPercentage;
+    int screenDiagnoalSize, numOfPixels, numOfButtons, flashBrightnessEV;
     Camera();
 
     void emitFlash();
@@ -299,18 +311,24 @@ struct Camera
     void captureImage();
 };
 
-Camera::Camera()
+Camera::Camera() :
+screenDiagnoalSize(3),
+numOfPixels(14),
+numOfButtons(7),
+flashBrightnessEV(9)
 {
-    std::cout << "Camera is being constructed!\n";
+    batteryLevelPercentage = 100.0f;
+    std::cout << "A " << numOfPixels << " Megapixel Camera is being constructed!\n";
 }
 
 void Camera::emitFlash()
 {
-    std::cout << "FLASH " << flashBrightnessEV << " times!\n";
+    std::cout << "FLASHING " << flashBrightnessEV << " times!\n";
 }
 
 float Camera::displayBatteryLvl()
 {
+    std::cout << batteryLevelPercentage << "% battery remaining.\n";
     return batteryLevelPercentage;
 }
 
@@ -322,22 +340,30 @@ void Camera::captureImage()
 struct Receiver
 {
     Receiver();
-    int numOfInputChannels = 2;
-    int currentInputChannel = 1;
-    float mainVolume = 35.0;
-    int numOfOutputChannels = 4;
-    int currentOutputChannel = 1;
-    float trebleVolume = 5.0f;
-    float bassVolume = 5.0f;
+    float mainVolume, trebleVolume, bassVolume;
+    int numOfInputChannels, currentInputChannel, numOfOutputChannels, currentOutputChannel;
 
     int changeOutputChannelGroup(int target);
     void addInputChannel();
     float changeVolume(float changeAmount);
+    void displayNumOfChannels();
 };
 
-Receiver::Receiver()
+Receiver::Receiver() :
+mainVolume(35.0),
+trebleVolume(5.0f),
+bassVolume(5.0f),
+numOfInputChannels(2),
+currentInputChannel(1),
+numOfOutputChannels(4),
+currentOutputChannel(1)
 {
     std::cout << "Receiver is being constructed!\n";
+}
+
+void Receiver::displayNumOfChannels()
+{
+    std::cout << "This receiver is connected to " << numOfInputChannels << " input channels.\n";
 }
 
 int Receiver::changeOutputChannelGroup(int t)
@@ -353,7 +379,7 @@ int Receiver::changeOutputChannelGroup(int t)
 
 void Receiver::addInputChannel()
 {
-    numOfOutputChannels += 1;
+    numOfInputChannels += 1;
 }
 
 float Receiver::changeVolume(float chgAmnt)
@@ -365,26 +391,29 @@ float Receiver::changeVolume(float chgAmnt)
 struct Speakers
 {
     Speakers();
-    int numOfSpeakers = 2;
-    float tweeterDiameter = 2.0f;
-    int speakerWattage = 35;
-    float wooferDiameter = 5.5f;
-    float midDriverDiameter = 3.3f;
-    float volume = 10.0f;
+    int numOfSpeakers, speakerWattage;
+    float tweeterDiameter, wooferDiameter, midDriverDiameter, volume;
 
     void addSpeakers(int spkrsToAdd);
     float changeVolume(float changeAmount);
     void bypassSpeakerDriver();
 };
 
-Speakers::Speakers()
+Speakers::Speakers():
+tweeterDiameter(2.0f),
+wooferDiameter(5.5f),
+midDriverDiameter(3.3f),
+volume(10.0f)
 {
+    numOfSpeakers = 2;
+    speakerWattage = 35;
     std::cout << "Speakers is being constructed!\n";
 }
 
 void Speakers::addSpeakers(int numSpkrs)
 {
     numOfSpeakers += numSpkrs;
+    std::cout << "There are now " << numOfSpeakers << " speakers connected.\n";
 }
 
 float Speakers::changeVolume(float chngAmnt)
@@ -402,18 +431,20 @@ void Speakers::bypassSpeakerDriver()
 struct Turntable
 {
     Turntable();
-    int playbackSpeed = 45;
-    float pitchAdjustPercent = 0.0f;
-    int playDirection = 1;
-    float needLocation = 1.0f;
-    int totalRunTime = 0;
+    int playbackSpeed, playDirection, totalRunTime;
+    float pitchAdjustPercent, needLocation;
 
     void rotateForward();
     float moveNeedle(float moveAmount);    // returns new location
     float changePitchAdjust(float changeAmount);
 };
 
-Turntable::Turntable()
+Turntable::Turntable(): 
+playbackSpeed(45),
+playDirection(1),
+totalRunTime(0), 
+pitchAdjustPercent(0.0f),
+needLocation(1.0f)
 {
     std::cout << "Turntable is being constructed!\n";
 }
@@ -438,11 +469,8 @@ float Turntable::changePitchAdjust(float chngAmnt)
 struct Radio
 {
     Radio();
-    int fmChannel = 971;
-    int amChannel = 540;
-    int satChannel = 55;
-    int activeChannelPreset = 1;
-    std::string currentWaveType = {"fm"};    // I think this should be an enum, but we haven't covered that yet.
+    int fmChannel, amChannel, satChannel, activeChannelPreset;
+    std::string currentWaveType;    // I think this should be an enum, but we haven't covered that yet.
     float broadcastSignalStrengthPercent = 100.0f;
 
     int changeFmChannel(int targetChannel);
@@ -450,8 +478,13 @@ struct Radio
     std::string changeWaveListenedType(std::string targetWave);    // should prob only accept a wave types enum
 };
 
-Radio::Radio()
+Radio::Radio() :
+fmChannel(971),
+amChannel(540), 
+satChannel(55),
+activeChannelPreset(1)
 {
+    currentWaveType = "fm";
     std::cout << "Radio is being constructed!\n";
 }
 
@@ -480,20 +513,18 @@ std::string Radio::changeWaveListenedType(std::string trgtWave)
 struct CdChanger
 {
     CdChanger();
-    int numDiscsInChanger = 0;
-    int maxNumDiscsInChanger = 32;
-    int currTrackNumber = 1;
-    int currentDiscNumber = {};
-    std::string currentTrackName = "Sister Christian";
-    std::string currentDisc = "Midnight Madness";
+    int numDiscsInChanger, maxNumDiscsInChanger, currTrackNumber, currentDiscNumber;
+    std::string currentTrackName;
+    std::string currentDisc;
 
     struct Disc
     {
         Disc();
-        std::string albumName;
-        std::string firstTrack;
+        std::string albumName, firstTrack;
         int numOfTracks = 12;            // I know this limits all discs to 12 tracks.
         std::string trackList[12] {};    // but I don't know how to do a dynamic-sized array in C++ yet
+
+        void displayAlbumName();
     };
 
     Disc activeDisk;
@@ -505,11 +536,24 @@ struct CdChanger
 
 CdChanger::Disc::Disc()
 {
+    albumName = "Songs from the Aqualounge";
+    firstTrack = "Temporary High";
     std::cout << "Disc is being constructed!\n";
 }
 
-CdChanger::CdChanger()
+void CdChanger::Disc::displayAlbumName()
 {
+    std::cout << "This album is called: " << albumName << std::endl;
+}
+
+CdChanger::CdChanger() :
+numDiscsInChanger(0),
+maxNumDiscsInChanger(32),
+currTrackNumber(1),
+currentDiscNumber(1)
+{
+    currentTrackName = "Sister Christian";
+    currentDisc = "Midnight Madness";
     std::cout << "CdChanger is being constructed!\n";
 }
 
@@ -542,11 +586,17 @@ struct HomeStereo
     void insertNewDisc(CdChanger::Disc newDisc);
     void changeFmChannel(int newFmChannel, Radio radio);
     void playInReverse(Turntable attachedTurntable);
+    void whatsInCdPlayer();
 };
 
 HomeStereo::HomeStereo()
 {
     std::cout << "HomeStereo is being constructed!\n";
+}
+
+void HomeStereo::whatsInCdPlayer()
+{
+    std::cout << "Looks like we've got " << cdChanger.activeDisk.albumName << " queued up.  Rockin!\n";
 }
 
 void HomeStereo::insertNewDisc(CdChanger::Disc newDisc)
@@ -574,6 +624,7 @@ int main()
     Example::main();
 
     //add your code below this line:
+    std::cout << "...just making some room here.\n\n\n";
     Sword excalibur;
     excalibur.lengthInCm = 45;
     std::cout << "----------------\n";
@@ -647,6 +698,7 @@ int main()
 
     gbColor.currentGame.saveGameStateToRAM();
     gbColor.currentGame.doYouHaveBattleToads();
+    gbColor.howBigIsScreen();
 
     gbColor.adjustVolume(10.0f);
     gbColor.adjustBrightness(35.0);
@@ -665,10 +717,11 @@ int main()
     leica.displayBatteryLvl();
     leica.captureImage();
 
-    std::cout << "Camera battery is currently at " << leica.displayBatteryLvl() << " percent.\n";
-
+    //std::cout << "Camera battery is currently at " << leica.displayBatteryLvl() << " percent.\n";
+    harmonKardon.displayNumOfChannels();
     harmonKardon.changeOutputChannelGroup(2);
     harmonKardon.addInputChannel();
+    harmonKardon.displayNumOfChannels();
     std::cout << "Receiver volume is at " << harmonKardon.mainVolume << std::endl;
     harmonKardon.changeVolume(-7.3f);
     std::cout << "Receiver volume is at " << harmonKardon.mainVolume << std::endl;
@@ -687,7 +740,8 @@ int main()
     rca.changeFmChannel(979);
     rca.changeChannelPreset(3);
     rca.changeWaveListenedType("am");
-    
+
+    vanHalen.displayAlbumName();
     phillips.playCD(2, vanHalen);
     phillips.changeTrack (2, vanHalen);
     std::cout << "Hey, what does this button do?...\n";
@@ -699,6 +753,7 @@ int main()
     bose.changeFmChannel(959, bose.radio);
     bose.changeFmChannel(1007, rca);
     bose.playInReverse(bose.turntable);
+    bose.whatsInCdPlayer();
     
     std::cout << "good to go!" << std::endl;
 }
