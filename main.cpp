@@ -689,7 +689,9 @@ struct CdChanger
         std::string albumName, firstTrack;
         int numOfTracks = 12;            // I know this limits all discs to 12 tracks.
         std::string trackList[12] {};    // but I don't know how to do a dynamic-sized array in C++ yet
-
+        
+        void populateAlbumTrackNames();
+        void displayAlbumTrackNames();
         void displayAlbumName();
     };
 
@@ -712,6 +714,24 @@ CdChanger::Disc::Disc()
 void CdChanger::Disc::displayAlbumName()
 {
     std::cout << "This album is called: " << albumName << std::endl;
+}
+
+void CdChanger::Disc::populateAlbumTrackNames()
+{
+    int i{};
+    while(i < numOfTracks)
+    {
+        // looked in cpp ref to find the string convert method 
+        // https://en.cppreference.com/w/cpp/string/basic_string/to_string
+        std::string thisTrack = std::to_string(i);
+        trackList[i] = "Track No. " + thisTrack;
+        ++i;
+    }
+}
+
+void CdChanger::Disc::displayAlbumTrackNames()
+{
+    
 }
 
 CdChanger::CdChanger() :
@@ -763,7 +783,7 @@ struct HomeStereo
     Radio radio;
     CdChanger cdChanger;
 
-    void insertNewDisc(CdChanger::Disc newDisc);
+    void insertNewDisc(CdChanger::Disc newDisc, bool autoPlay);
     void changeFmChannel(int newFmChannel, Radio radio);
     void playInReverse(Turntable attachedTurntable);
     void whatsInCdPlayer();
@@ -780,10 +800,10 @@ void HomeStereo::whatsInCdPlayer()
     std::cout << "Looks like we've got " << cdChanger.activeDisk.albumName << " queued up.  Rockin!\n";
 }
 
-void HomeStereo::insertNewDisc(CdChanger::Disc newDisc)
+void HomeStereo::insertNewDisc(CdChanger::Disc newDisc, bool autoP)
 {
     cdChanger.numDiscsInChanger += 1;
-    cdChanger.playCD(cdChanger.numDiscsInChanger, newDisc);
+    if(autoP) cdChanger.playCD(cdChanger.numDiscsInChanger, newDisc);
 }
 void HomeStereo::changeFmChannel(int newFmChnl, Radio rad)
 {
@@ -799,8 +819,8 @@ void HomeStereo::playAllCds()
     int i{};
     while(++i < cdChanger.numDiscsInChanger)
     {
+        std::cout << "\vPlaying CD Number: " << i << std::endl;
         cdChanger.playCdTillEnd(1);
-        
     }
 }
 
@@ -865,6 +885,22 @@ int main()
     
     CdChanger::Disc rideTheLightning;
     rideTheLightning.albumName = "Ride The Lightning";
+    rideTheLightning.populateAlbumTrackNames();
+    std::cout << "--------------------------------------------------------------------\n";
+    
+    CdChanger::Disc imagesAndWords;
+    imagesAndWords.albumName = "Images And Words";
+    imagesAndWords.populateAlbumTrackNames();
+    std::cout << "--------------------------------------------------------------------\n";
+    
+    CdChanger::Disc bustinOut;
+    bustinOut.albumName = "Bustin Out";
+    bustinOut.populateAlbumTrackNames();
+    std::cout << "--------------------------------------------------------------------\n";
+    
+    CdChanger::Disc kindOfBlue;
+    kindOfBlue.albumName = "Kind Of Blue";
+    kindOfBlue.populateAlbumTrackNames();
     std::cout << "--------------------------------------------------------------------\n";
     
     HomeStereo bose;
@@ -874,6 +910,7 @@ int main()
     excalibur.stab();
     excalibur.needSharpen();
     std::cout << "Excalibur is made from " << excalibur.material << "!" << std::endl;
+    excalibur.multiAttack(5);
 
     platinum.writeCharacter('q');
     platinum.drawALine(1, 5, 15);
@@ -952,16 +989,20 @@ int main()
     phillips.pausePlayback();
 
     std::cout << "Current CD in rotation: " << bose.cdChanger.currentDisc << std::endl;
-    bose.insertNewDisc(rideTheLightning);
+    bose.insertNewDisc(rideTheLightning, false);
     std::cout << "Current CD in rotation: " << bose.cdChanger.currentDisc << std::endl;
     bose.changeFmChannel(959, bose.radio);
     bose.changeFmChannel(1007, rca);
     bose.playInReverse(bose.turntable);
     bose.whatsInCdPlayer();
+    bose.insertNewDisc(vanHalen, false);
+    bose.insertNewDisc(imagesAndWords, false);
+    bose.insertNewDisc(bustinOut, false);
+    bose.insertNewDisc(kindOfBlue, false);
+    bose.playAllCds();
     std::cout << "--------------------------------------------------------------------\n";
     std::cout << "--------------------------------------------------------------------\n";
 
-    excalibur.multiAttack(5);
     
     std::cout << "good to go!" << std::endl;
 }
